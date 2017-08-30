@@ -13,7 +13,7 @@ use yii\bootstrap\Tabs;
 
 <?php $form = WavecmsForm::begin(); ?>
 
-<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'text']); ?>
+<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'home']); ?>
 
 <?php ob_start(); ?>
 <div class="row">
@@ -22,20 +22,8 @@ use yii\bootstrap\Tabs;
         <?php PanelWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Required'), 'panel_class' => 'panel-success']); ?>
 
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <?php echo $form->field($model, 'title'); ?>
-
-                <?= $form->field($model, 'link')->widget(Slugify::className(), ['source' => '#page-title']) ?>
-
-
-            </div>
-
-            <div class="col-md-3">
-                <?php echo $form->field($model, 'languages')->checkboxList([
-                    'pl' => 'PL',
-                    'en' => 'EN',
-                ]);
-                ?>
             </div>
         </div>
 
@@ -45,11 +33,8 @@ use yii\bootstrap\Tabs;
 
         <div class="row">
             <div class="col-md-12">
-
                 <?= $form->field($model, 'text')->widget(CKEditorWidget::className())->label(false) ?>
-
             </div>
-
         </div>
 
         <?php PanelWidget::end(); ?>
