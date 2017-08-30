@@ -3,9 +3,11 @@ UNDER DEV !!!
 
 
 # yii2-wavecms-page
-Page module for [WaveCMS](https://github.com/mrstroz/yii2-wavecms).
+Page module for **WaveCMS**
 
-**Not recommended to use separately. Please install whole [WaveCMS](https://github.com/mrstroz/yii2-wavecms)**
+**This module required [Yii 2 WaveCMS User](https://github.com/mrstroz/yii2-wavecms-user).** 
+
+Please do all install steps first from [Yii 2 WaveCMS User](https://github.com/mrstroz/yii2-wavecms-user).
 
 Installation
 ------------
@@ -33,18 +35,15 @@ Required
 1. Update `backend/config/main.php` (Yii2 advanced template) 
 ```
 'bootstrap' => [
-    ...
+    // ...
     'mrstroz\wavecms\page\Bootstrap'
-    ...
 ],
 'modules' => [
-    ...
+    // ...
     'page' => [
         'class' => 'mrstroz\wavecms\page\Module',
     ],
-    ...
 ],
-
 ```
 
 2. Run migration 
