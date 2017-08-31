@@ -53,7 +53,7 @@ class PageLang extends \yii\db\ActiveRecord
             'text' => Yii::t('wavecms/base/main', 'Text'),
             'meta_title' => Yii::t('wavecms/base/main', 'Meta title'),
             'meta_description' => Yii::t('wavecms/base/main', 'Meta description'),
-            'meta_keywords' => Yii::t('wavecms/page/base', 'Meta keywords'),
+            'meta_keywords' => Yii::t('wavecms/base/main', 'Meta keywords'),
         ];
     }
 

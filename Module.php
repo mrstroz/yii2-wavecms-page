@@ -2,18 +2,21 @@
 
 namespace mrstroz\wavecms\page;
 
-use Yii;
-
 class Module extends \yii\base\Module
 {
+    public $models = [];
+    public $forms = [];
 
     public function init()
     {
-        if ( Yii::$app->id === 'app-backend' ) {
-            $this->controllerNamespace = 'mrstroz\wavecms\page\controllers\backend';
-        } else {
-            $this->controllerNamespace = 'mrstroz\wavecms\page\controllers\frontend';
+        if (!isset($this->models['Page'])) {
+            $this->models['Page'] = 'mrstroz\wavecms\page\models\Page';
         }
+        if (!isset($this->models['PageLang'])) {
+            $this->models['PageLang'] = 'mrstroz\wavecms\page\models\PageLang';
+        }
+
+        $this->controllerNamespace = 'mrstroz\wavecms\page\controllers';
 
         parent::init();
     }

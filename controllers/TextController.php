@@ -1,12 +1,10 @@
 <?php
 
-namespace mrstroz\wavecms\page\controllers\backend;
+namespace mrstroz\wavecms\page\controllers;
 
 use mrstroz\wavecms\base\grid\ActionColumn;
 use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\web\Controller;
-use mrstroz\wavecms\page\models\Page;
-use mrstroz\wavecms\page\models\PageLang;
 use mrstroz\wavecms\page\models\PageSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -16,22 +14,27 @@ class TextController extends Controller
 
     public function init()
     {
-        $this->viewPath = '@wavecms_page/views/backend/text';
+        if (isset($this->module->forms['page/text'])) {
+            $this->viewForm = $this->module->forms['page/text'];
+        }
+
+        $modelPage = Yii::createObject($this->module->models['Page']);
+        $modelPageLang = Yii::createObject($this->module->models['PageLang']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Text pages');
-        $this->query = Page::find()->leftJoin(PageLang::tableName(), PageLang::tableName() . '.page_id = ' . Page::tableName() . '.id')->andWhere(['type' => 'text']);
-        $this->scenario = Page::SCENARIO_TEXT;
+        $this->query = $modelPage::find()->leftJoin($modelPageLang::tableName(), $modelPageLang::tableName() . '.page_id = ' . $modelPage::tableName() . '.id')->andWhere(['type' => 'text']);
+        $this->scenario = $modelPage::SCENARIO_TEXT;
 
         $this->dataProvider = new ActiveDataProvider([
             'query' => $this->query
         ]);
         $this->dataProvider->sort->attributes['pageLangTitle'] = [
-            'asc' => [PageLang::tableName() . '.title' => SORT_ASC],
-            'desc' => [PageLang::tableName() . '.title' => SORT_DESC],
+            'asc' => [$modelPageLang::tableName() . '.title' => SORT_ASC],
+            'desc' => [$modelPageLang::tableName() . '.title' => SORT_DESC],
         ];
         $this->dataProvider->sort->attributes['pageLangLink'] = [
-            'asc' => [PageLang::tableName() . '.link' => SORT_ASC],
-            'desc' => [PageLang::tableName() . '.link' => SORT_DESC],
+            'asc' => [$modelPageLang::tableName() . '.link' => SORT_ASC],
+            'desc' => [$modelPageLang::tableName() . '.link' => SORT_DESC],
         ];
 
 

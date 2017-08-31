@@ -42,6 +42,17 @@ Required
     // ...
     'page' => [
         'class' => 'mrstroz\wavecms\page\Module',
+        /*
+         * Overwrite model classes and form views
+         'models' => [
+            'Page' => 'mrstroz\wavecms\page\models\Page',
+            'PageLang' => 'mrstroz\wavecms\page\models\PageLang'
+         ],
+         'forms' => [
+            'page/home' => '@backend/views/page/home/form.php',
+            'page/text' => '@backend/views/page/text/form.php'
+         ]
+         */
     ],
 ],
 ```

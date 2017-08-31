@@ -47,11 +47,11 @@ class Page extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            [
+            'checkbox_list' => [
                 'class' => CheckboxListBehavior::className(),
                 'fields' => ['languages']
             ],
-            [
+            'translate' => [
                 'class' => TranslateBehavior::className(),
                 'translationAttributes' => [
                     'title', 'link', 'text', 'meta_title', 'meta_description', 'meta_keywords'
@@ -66,12 +66,10 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['languages', 'title', 'link'], 'required'],
             [['publish'], 'integer'],
-            [['languages'], 'required',],
-            [['type'], 'string', 'max' => 255],
-            [['title'], 'required'],
-            [['link'], 'required'],
             [['link'], 'validateUniqueLink'],
+            [['type'], 'string', 'max' => 255],
             [['text', 'meta_title', 'meta_description', 'meta_keywords'], 'string']
         ];
     }

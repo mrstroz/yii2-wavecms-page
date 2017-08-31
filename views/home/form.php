@@ -1,11 +1,9 @@
 <?php
 
-use modernkernel\slugify\Slugify;
 use mrstroz\wavecms\base\helpers\FormHelper;
 use mrstroz\wavecms\base\helpers\WavecmsForm;
 use mrstroz\wavecms\base\widgets\CKEditorWidget;
 use mrstroz\wavecms\base\widgets\MetaTagsWidget;
-use mrstroz\wavecms\base\widgets\PanelWidget;
 use yii\bootstrap\Html;
 use yii\bootstrap\Tabs;
 
@@ -17,31 +15,14 @@ use yii\bootstrap\Tabs;
 
 <?php ob_start(); ?>
 <div class="row">
-
     <div class="col-md-12">
-        <?php PanelWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Required'), 'panel_class' => 'panel-success']); ?>
-
         <div class="row">
             <div class="col-md-12">
                 <?php echo $form->field($model, 'title'); ?>
+                <?php echo $form->field($model, 'text')->widget(CKEditorWidget::className()) ?>
             </div>
         </div>
-
-        <?php PanelWidget::end(); ?>
-
-        <?php PanelWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Text')]); ?>
-
-        <div class="row">
-            <div class="col-md-12">
-                <?= $form->field($model, 'text')->widget(CKEditorWidget::className())->label(false) ?>
-            </div>
-        </div>
-
-        <?php PanelWidget::end(); ?>
-
     </div>
-
-
 </div>
 
 
@@ -54,7 +35,7 @@ ob_end_clean();
 
 <div class="row">
     <div class="col-md-12">
-        <?php echo MetaTagsWidget::widget(['model' => $model,'form' => $form]); ?>
+        <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
     </div>
 </div>
 
@@ -79,7 +60,5 @@ ob_end_clean();
 
 ?>
 
-
 <?php FormHelper::saveButton() ?>
-
 <?php WavecmsForm::end(); ?>

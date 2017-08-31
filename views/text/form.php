@@ -19,44 +19,32 @@ use yii\bootstrap\Tabs;
 <div class="row">
 
     <div class="col-md-12">
-        <?php PanelWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Required'), 'panel_class' => 'panel-success']); ?>
 
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <?php echo $form->field($model, 'title'); ?>
-
-                <?= $form->field($model, 'link')->widget(Slugify::className(), ['source' => '#page-title']) ?>
-
-
+                <?php echo $form->field($model, 'link')->widget(Slugify::className(), ['source' => '#page-title']) ?>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <?php PanelWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Languages')]); ?>
+                <?php echo Yii::t('wavecms/page/main','Page will be displayed in following languages:'); ?>
                 <?php echo $form->field($model, 'languages')->checkboxList([
                     'pl' => 'PL',
                     'en' => 'EN',
-                ]);
+                ])->label(false);
                 ?>
+                <?php PanelWidget::end(); ?>
             </div>
         </div>
 
-        <?php PanelWidget::end(); ?>
-
-        <?php PanelWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Text')]); ?>
 
         <div class="row">
             <div class="col-md-12">
-
                 <?= $form->field($model, 'text')->widget(CKEditorWidget::className())->label(false) ?>
-
             </div>
-
         </div>
-
-        <?php PanelWidget::end(); ?>
-
     </div>
-
-
 </div>
 
 
@@ -69,7 +57,7 @@ ob_end_clean();
 
 <div class="row">
     <div class="col-md-12">
-        <?php echo MetaTagsWidget::widget(['model' => $model,'form' => $form]); ?>
+        <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
     </div>
 </div>
 
@@ -94,7 +82,5 @@ ob_end_clean();
 
 ?>
 
-
 <?php FormHelper::saveButton() ?>
-
 <?php WavecmsForm::end(); ?>
