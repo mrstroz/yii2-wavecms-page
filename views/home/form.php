@@ -4,16 +4,18 @@ use mrstroz\wavecms\base\helpers\FormHelper;
 use mrstroz\wavecms\base\helpers\WavecmsForm;
 use mrstroz\wavecms\base\widgets\CKEditorWidget;
 use mrstroz\wavecms\base\widgets\MetaTagsWidget;
+use mrstroz\wavecms\base\widgets\TabsWidget;
+use mrstroz\wavecms\base\widgets\TabWidget;
 use yii\bootstrap\Html;
-use yii\bootstrap\Tabs;
 
 ?>
 
 <?php $form = WavecmsForm::begin(); ?>
+<?php TabsWidget::begin(); ?>
 
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'home']); ?>
 
-<?php ob_start(); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
 <div class="row">
     <div class="col-md-12">
         <div class="row">
@@ -24,41 +26,16 @@ use yii\bootstrap\Tabs;
         </div>
     </div>
 </div>
+<?php TabWidget::end(); ?>
 
-
-<?php
-$tab1 = ob_get_contents();
-ob_end_clean();
-?>
-
-<?php ob_start(); ?>
-
+<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Meta tags')]); ?>
 <div class="row">
     <div class="col-md-12">
         <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
     </div>
 </div>
+<?php TabWidget::end(); ?>
 
-<?php
-$tab2 = ob_get_contents();
-ob_end_clean();
-?>
-
-<?php echo Tabs::widget([
-    'items' => [
-        [
-            'label' => Yii::t('wavecms/base/main', 'General'),
-            'content' => $tab1,
-            'active' => true
-        ],
-        [
-            'label' => Yii::t('wavecms/base/main', 'Meta tags'),
-            'content' => $tab2
-        ]
-    ]
-]);
-
-?>
-
+<?php TabsWidget::end(); ?>
 <?php FormHelper::saveButton() ?>
 <?php WavecmsForm::end(); ?>
