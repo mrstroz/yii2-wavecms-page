@@ -1,12 +1,10 @@
 <?php
 
-use modernkernel\slugify\Slugify;
 use mrstroz\wavecms\base\helpers\FormHelper;
 use mrstroz\wavecms\base\helpers\WavecmsForm;
-use mrstroz\wavecms\base\widgets\CKEditorWidget;
 use mrstroz\wavecms\base\widgets\LanguagesWidget;
-use mrstroz\wavecms\base\widgets\MetaTagsWidget;
-use mrstroz\wavecms\base\widgets\PanelWidget;
+use mrstroz\wavecms\base\widgets\PageLinkWidget;
+use mrstroz\wavecms\base\widgets\SubListWidget;
 use mrstroz\wavecms\base\widgets\TabsWidget;
 use mrstroz\wavecms\base\widgets\TabWidget;
 use yii\bootstrap\Html;
@@ -17,7 +15,7 @@ use yii\bootstrap\Html;
 
 <?php TabsWidget::begin(); ?>
 
-<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'text']); ?>
+<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'top']); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
 <div class="row">
@@ -27,7 +25,12 @@ use yii\bootstrap\Html;
         <div class="row">
             <div class="col-md-8 col-lg-9">
                 <?php echo $form->field($model, 'title'); ?>
-                <?php echo $form->field($model, 'link')->widget(Slugify::className(), ['source' => '#page-title']) ?>
+
+                <?php echo PageLinkWidget::widget([
+                    'form' => $form,
+                    'model' => $model
+                ]); ?>
+
             </div>
 
             <div class="col-md-4 col-lg-3">
@@ -38,22 +41,17 @@ use yii\bootstrap\Html;
             </div>
         </div>
 
-
-        <div class="row">
-            <div class="col-md-12">
-                <?= $form->field($model, 'text')->widget(CKEditorWidget::className()) ?>
-            </div>
-        </div>
     </div>
 </div>
 <?php TabWidget::end(); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Meta tags')]); ?>
-<div class="row">
-    <div class="col-md-12">
-        <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
-    </div>
-</div>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Submenu')]); ?>
+
+<?php echo SubListWidget::widget([
+    'list_id' => 'submenu',
+    'model' => $model
+]); ?>
+
 <?php TabWidget::end(); ?>
 
 <?php TabsWidget::end(); ?>

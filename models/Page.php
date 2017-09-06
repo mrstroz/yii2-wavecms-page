@@ -5,6 +5,7 @@ namespace mrstroz\wavecms\page\models;
 use mrstroz\wavecms\base\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\base\behaviors\TranslateBehavior;
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "page".
@@ -104,16 +105,33 @@ class Page extends \yii\db\ActiveRecord
         return new PageQuery(get_called_class());
     }
 
+    /**
+     * Required for Translate behaviour
+     * @return ActiveQuery
+     */
     public function getTranslations()
     {
         return $this->hasMany(PageLang::className(), ['page_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getPageLang()
     {
-        return $this->hasOne(PageLang::className(), ['page_id' => 'id'])->andWhere(['language' => Yii::$app->wavecms->editedLanguage]);
+        $query = $this->hasOne(PageLang::className(), ['page_id' => 'id']);
+
+        if (Yii::$app->id === 'app-backend') {
+            $query->andWhere(['language' => Yii::$app->wavecms->editedLanguage]);
+        } else {
+            $query->andWhere(['language' => Yii::$app->language]);
+        }
+        return $query;
     }
 
+    /**
+     * @return bool|ActiveQuery
+     */
     public function getPageLangTitle()
     {
         if ($this->pageLang) {
@@ -123,6 +141,9 @@ class Page extends \yii\db\ActiveRecord
         return false;
     }
 
+    /**
+     * @return bool|ActiveQuery
+     */
     public function getPageLangLink()
     {
         if ($this->pageLang) {

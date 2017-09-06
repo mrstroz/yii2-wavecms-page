@@ -14,6 +14,7 @@ use yii\bootstrap\Html;
 <?php TabsWidget::begin(); ?>
 
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'home']); ?>
+<?php echo Html::activeHiddenInput($model, 'publish', ['value' => 1]); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
 <div class="row">

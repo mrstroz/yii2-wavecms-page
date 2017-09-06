@@ -22,7 +22,7 @@ class TextController extends Controller
         $modelPageLang = Yii::createObject($this->module->models['PageLang']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Text pages');
-        $this->query = $modelPage::find()->leftJoin($modelPageLang::tableName(), $modelPageLang::tableName() . '.page_id = ' . $modelPage::tableName() . '.id')->andWhere(['type' => 'text']);
+        $this->query = $modelPage::find()->joinWith('pageLang')->andWhere(['type' => 'text']);
         $this->scenario = $modelPage::SCENARIO_TEXT;
 
         $this->dataProvider = new ActiveDataProvider([

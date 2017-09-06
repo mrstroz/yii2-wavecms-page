@@ -22,19 +22,39 @@ class Bootstrap implements BootstrapInterface
             ];
 
             Yii::$app->params['nav'][] = [
+                'label' => FontAwesome::icon('bars') . Yii::t('wavecms/page/main', 'Menu'),
+                'url' => 'javascript: ;',
+                'options' => [
+                    'class' => 'drop-down'
+                ],
+                'permission' => 'page',
+                'position' => 1000,
+                'items' => [
+                    [
+                        'label' => FontAwesome::icon('ellipsis-h') . Yii::t('wavecms/page/main', 'Top menu'),
+                        'url' => ['/page/menu-top/index']
+                    ],
+                    ['label' => FontAwesome::icon('ellipsis-h') . Yii::t('wavecms/page/main', 'Bottom menu'),
+                        'url' => ['/page/menu-bottom/index']
+                    ]
+
+                ]
+            ];
+
+            Yii::$app->params['nav'][] = [
                 'label' => FontAwesome::icon('sitemap') . Yii::t('wavecms/page/main', 'Pages'),
                 'url' => 'javascript: ;',
                 'options' => [
                     'class' => 'drop-down'
                 ],
                 'permission' => 'page',
-                'position' => 90,
+                'position' => 2000,
                 'items' => [
                     [
                         'label' => FontAwesome::icon('home') . Yii::t('wavecms/page/main', 'Home page'),
                         'url' => ['/page/home/page']
                     ],
-                    ['label' => FontAwesome::icon('file') . Yii::t('wavecms/page/main', 'Text pages'),
+                    ['label' => FontAwesome::icon('file-text-o') . Yii::t('wavecms/page/main', 'Text pages'),
                         'url' => ['/page/text/index']
                     ]
 
