@@ -9,6 +9,12 @@ class Module extends \yii\base\Module
 
     public function init()
     {
+        if (!isset($this->models['Home'])) {
+            $this->models['Home'] = 'mrstroz\wavecms\page\models\Page';
+        }
+        if (!isset($this->models['HomeLang'])) {
+            $this->models['HomeLang'] = 'mrstroz\wavecms\page\models\PageLang';
+        }
         if (!isset($this->models['Page'])) {
             $this->models['Page'] = 'mrstroz\wavecms\page\models\Page';
         }

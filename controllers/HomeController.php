@@ -10,8 +10,8 @@ class HomeController extends Controller
 
     public function init()
     {
-        $modelPage = Yii::createObject($this->module->models['Page']);
-        $modelPageLang = Yii::createObject($this->module->models['PageLang']);
+        $modelPage = Yii::createObject($this->module->models['Home']);
+        $modelPageLang = Yii::createObject($this->module->models['HomeLang']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Home page');
         $this->query = $modelPage::find()->leftJoin($modelPageLang::tableName(), $modelPageLang::tableName() . '.page_id = ' . $modelPage::tableName() . '.id')->andWhere(['type' => 'home']);

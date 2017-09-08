@@ -45,6 +45,8 @@ Required
         /*
          * Overwrite model classes and form views
          'models' => [
+            'Home' => 'mrstroz\wavecms\page\models\Page',
+            'HomeLang' => 'mrstroz\wavecms\page\models\PageLang',
             'Page' => 'mrstroz\wavecms\page\models\Page',
             'PageLang' => 'mrstroz\wavecms\page\models\PageLang',
             'Menu' => 'mrstroz\wavecms\page\models\Menu',
