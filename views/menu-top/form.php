@@ -48,7 +48,7 @@ use yii\bootstrap\Html;
 <?php TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Submenu')]); ?>
 
 <?php echo SubListWidget::widget([
-    'list_id' => 'submenu',
+    'listId' => 'submenu',
     'model' => $model
 ]); ?>
 

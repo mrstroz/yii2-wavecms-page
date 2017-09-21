@@ -55,7 +55,7 @@ class Page extends \yii\db\ActiveRecord
             ],
             'home_slider' => [
                 'class' => SubListBehavior::className(),
-                'list_id' => 'home_slider',
+                'listId' => 'home_slider',
                 'route' => '/page/home-slider/sub-list',
                 'parentField' => 'page_id'
             ],

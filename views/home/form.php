@@ -33,7 +33,7 @@ use yii\bootstrap\Html;
 <?php TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Slider')]); ?>
 
 <?php echo SubListWidget::widget([
-    'list_id' => 'home_slider',
+    'listId' => 'home_slider',
     'model' => $model
 ]); ?>
 

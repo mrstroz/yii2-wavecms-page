@@ -40,7 +40,7 @@ class Menu extends ActiveRecord
             ],
             'submenu' => [
                 'class' => SubListBehavior::className(),
-                'list_id' => 'submenu',
+                'listId' => 'submenu',
                 'route' => '/page/menu-children/sub-list',
                 'parentField' => 'parent_id'
             ],
