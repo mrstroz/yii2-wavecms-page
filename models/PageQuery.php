@@ -42,7 +42,7 @@ class PageQuery extends \yii\db\ActiveQuery
     {
         return $this
             ->select(['link'])
-            ->joinWith('pageLang')
+            ->joinPageLang()
             ->orFilterWhere(['and',
                 ['=', 'publish', '1'],
                 ['=', 'type', 'text'],
@@ -54,7 +54,7 @@ class PageQuery extends \yii\db\ActiveQuery
     {
         return $this
             ->select([Page::tableName() . '.id', PageLang::tableName() . '.link'])
-            ->joinWith('pageLang');
+            ->joinPageLang();
     }
 
     public function getByLink($link)
@@ -62,5 +62,20 @@ class PageQuery extends \yii\db\ActiveQuery
         return $this
             ->joinWith('translations')
             ->andWhere(['link' => $link]);
+    }
+
+    public function joinPageLang($language = null)
+    {
+        if (!$language) {
+            if (Yii::$app->id === 'app-backend') {
+                $language = Yii::$app->wavecms->editedLanguage;
+            } else {
+                $language = Yii::$app->language;
+            }
+        }
+
+        return $this->leftJoin(PageLang::tableName(),
+            PageLang::tableName() . '.page_id = ' . Page::tableName() . '.id AND 
+                ' . PageLang::tableName() . '.language = "' . $language . '"');
     }
 }

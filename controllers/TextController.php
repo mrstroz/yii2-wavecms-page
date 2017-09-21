@@ -2,6 +2,7 @@
 
 namespace mrstroz\wavecms\page\controllers;
 
+use mrstroz\wavecms\base\db\ActiveRecord;
 use mrstroz\wavecms\base\grid\ActionColumn;
 use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\web\Controller;
@@ -18,21 +19,25 @@ class TextController extends Controller
             $this->viewForm = $this->module->forms['page/text'];
         }
 
+        /** @var ActiveRecord $modelPage */
         $modelPage = Yii::createObject($this->module->models['Page']);
+        /** @var ActiveRecord $modelPageLang */
         $modelPageLang = Yii::createObject($this->module->models['PageLang']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Text pages');
-        $this->query = $modelPage::find()->joinWith('pageLang')->andWhere(['type' => 'text']);
+        $this->query = $modelPage::find()
+            ->joinPageLang()
+            ->andWhere(['type' => 'text']);
         $this->scenario = $modelPage::SCENARIO_TEXT;
 
         $this->dataProvider = new ActiveDataProvider([
             'query' => $this->query
         ]);
-        $this->dataProvider->sort->attributes['pageLangTitle'] = [
+        $this->dataProvider->sort->attributes['title'] = [
             'asc' => [$modelPageLang::tableName() . '.title' => SORT_ASC],
             'desc' => [$modelPageLang::tableName() . '.title' => SORT_DESC],
         ];
-        $this->dataProvider->sort->attributes['pageLangLink'] = [
+        $this->dataProvider->sort->attributes['link'] = [
             'asc' => [$modelPageLang::tableName() . '.link' => SORT_ASC],
             'desc' => [$modelPageLang::tableName() . '.link' => SORT_DESC],
         ];
@@ -43,10 +48,10 @@ class TextController extends Controller
         $this->columns = array(
             'id',
             [
-                'attribute' => 'pageLangTitle',
+                'attribute' => 'title',
             ],
             [
-                'attribute' => 'pageLangLink',
+                'attribute' => 'link',
             ],
             [
                 'attribute' => 'languages',

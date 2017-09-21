@@ -89,7 +89,6 @@ class PageItem extends \yii\db\ActiveRecord
             'image' => Yii::t('wavecms/base/main', 'Image'),
             'link_page_id' => Yii::t('wavecms/base/main', 'Page'),
             'link_page_url' => Yii::t('wavecms/base/main', 'Url'),
-            'pageItemLangTitle' => Yii::t('wavecms/base/main', 'Title'),
         ];
     }
 
@@ -107,33 +106,4 @@ class PageItem extends \yii\db\ActiveRecord
         return $this->hasMany(PageItemLang::className(), ['page_item_id' => 'id']);
     }
 
-    /**
-     * Used in waveCMS grid column
-     * @return ActiveQuery
-     */
-    public function getPageItemLang()
-    {
-        $query = $this->hasOne(PageItemLang::className(), ['page_item_id' => 'id']);
-
-        if (Yii::$app->id === 'app-backend') {
-            $query->andWhere(['language' => Yii::$app->wavecms->editedLanguage]);
-        } else {
-            $query->andWhere(['language' => Yii::$app->language]);
-        }
-
-        return $query;
-    }
-
-    /**
-     * Used in waveCMS grid column
-     * @return bool|string
-     */
-    public function getPageItemLangTitle()
-    {
-        if ($this->pageItemLang) {
-            return $this->pageItemLang->title;
-        }
-
-        return false;
-    }
 }

@@ -8,14 +8,14 @@ use yii\data\ActiveDataProvider;
 class PageSearch extends Page
 {
 
-    public $pageLangTitle;
-    public $pageLangLink;
+    public $title;
+    public $link;
 
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['pageLangTitle', 'pageLangLink'], 'safe'],
+            [['title', 'link'], 'safe'],
         ];
     }
 
@@ -33,8 +33,8 @@ class PageSearch extends Page
 
         $dataProvider->query->andFilterWhere(['or',
             [self::tableName() . '.id' => $this->id],
-            ['like', PageLang::tableName() . '.title', $this->pageLangTitle],
-            ['like', PageLang::tableName() . '.link', $this->pageLangLink]
+            ['like', PageLang::tableName() . '.title', $this->title],
+            ['like', PageLang::tableName() . '.link', $this->link]
         ]);
 
         return $dataProvider;

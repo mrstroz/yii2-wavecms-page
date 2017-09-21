@@ -85,7 +85,6 @@ class Menu extends ActiveRecord
             'page_id' => Yii::t('wavecms/base/main', 'Page'),
             'page_url' => Yii::t('wavecms/base/main', 'Url'),
             'title' => Yii::t('wavecms/base/main', 'Title'),
-            'menuLangTitle' => Yii::t('wavecms/base/main', 'Title'),
         ];
     }
 
@@ -103,33 +102,4 @@ class Menu extends ActiveRecord
         return $this->hasMany(MenuLang::className(), ['menu_id' => 'id']);
     }
 
-    /**
-     * Used in waveCMS grid column
-     * @return ActiveQuery
-     */
-    public function getMenuLang()
-    {
-        $query = $this->hasOne(MenuLang::className(), ['menu_id' => 'id']);
-
-        if (Yii::$app->id === 'app-backend') {
-            $query->andWhere(['language' => Yii::$app->wavecms->editedLanguage]);
-        } else {
-            $query->andWhere(['language' => Yii::$app->language]);
-        }
-
-        return $query;
-    }
-
-    /**
-     * Used in waveCMS grid column
-     * @return bool|string
-     */
-    public function getMenuLangTitle()
-    {
-        if ($this->menuLang) {
-            return $this->menuLang->title;
-        }
-
-        return false;
-    }
 }

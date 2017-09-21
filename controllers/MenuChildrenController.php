@@ -9,6 +9,7 @@ use mrstroz\wavecms\base\helpers\NavHelper;
 use mrstroz\wavecms\base\web\Controller;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveRecord;
 
 class MenuChildrenController extends Controller
 {
@@ -19,16 +20,17 @@ class MenuChildrenController extends Controller
             $this->viewForm = $this->module->forms['page/menu-children'];
         }
 
+        /** @var ActiveRecord $modelMenu */
         $modelMenu = Yii::createObject($this->module->models['Menu']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Submenu');
-        $this->query = $modelMenu::find()->joinWith('menuLang')->andWhere(['type' => 'children']);
+        $this->query = $modelMenu::find()->andWhere(['type' => 'children']);
 
         $this->sort = true;
 
         $this->columns = array(
             [
-                'attribute' => 'menuLangTitle',
+                'attribute' => 'title',
             ],
             [
                 'attribute' => 'languages',

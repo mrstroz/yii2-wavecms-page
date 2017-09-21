@@ -7,6 +7,7 @@ use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\grid\SortColumn;
 use mrstroz\wavecms\base\web\Controller;
 use Yii;
+use yii\db\ActiveRecord;
 
 class MenuBottomController extends Controller
 {
@@ -17,16 +18,17 @@ class MenuBottomController extends Controller
             $this->viewForm = $this->module->forms['page/menu-top'];
         }
 
+        /** @var ActiveRecord $modelMenu */
         $modelMenu = Yii::createObject($this->module->models['Menu']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Bottom menu');
-        $this->query = $modelMenu::find()->joinWith('menuLang')->andWhere(['type' => 'bottom']);
+        $this->query = $modelMenu::find()->andWhere(['type' => 'bottom']);
 
         $this->sort = true;
 
         $this->columns = array(
             [
-                'attribute' => 'menuLangTitle',
+                'attribute' => 'title',
             ],
             [
                 'attribute' => 'languages',

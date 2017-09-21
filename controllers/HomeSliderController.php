@@ -7,6 +7,7 @@ use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\grid\SortColumn;
 use mrstroz\wavecms\base\web\Controller;
 use Yii;
+use yii\db\ActiveRecord;
 
 class HomeSliderController extends Controller
 {
@@ -17,16 +18,17 @@ class HomeSliderController extends Controller
             $this->viewForm = $this->module->forms['page/home-slider'];
         }
 
+        /** @var ActiveRecord $modelMenu */
         $modelMenu = Yii::createObject($this->module->models['HomeSlider']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Slider');
-        $this->query = $modelMenu::find()->joinWith('pageItemLang')->andWhere(['type' => 'home-slider']);
+        $this->query = $modelMenu::find()->andWhere(['type' => 'home-slider']);
 
         $this->sort = true;
 
         $this->columns = array(
             [
-                'attribute' => 'pageItemLangTitle',
+                'attribute' => 'title',
             ],
             [
                 'attribute' => 'languages',

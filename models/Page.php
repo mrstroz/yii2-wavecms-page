@@ -124,42 +124,6 @@ class Page extends \yii\db\ActiveRecord
     /**
      * @return ActiveQuery
      */
-    public function getPageLang()
-    {
-        $query = $this->hasOne(PageLang::className(), ['page_id' => 'id']);
-
-        if (Yii::$app->id === 'app-backend') {
-            $query->andWhere(['language' => Yii::$app->wavecms->editedLanguage]);
-        } else {
-            $query->andWhere(['language' => Yii::$app->language]);
-        }
-        return $query;
-    }
-
-    /**
-     * @return bool|ActiveQuery
-     */
-    public function getPageLangTitle()
-    {
-        if ($this->pageLang) {
-            return $this->pageLang->title;
-        }
-
-        return false;
-    }
-
-    /**
-     * @return bool|ActiveQuery
-     */
-    public function getPageLangLink()
-    {
-        if ($this->pageLang) {
-            return $this->pageLang->link;
-        }
-
-        return false;
-    }
-
     public function validateUniqueLink($attribute)
     {
 
