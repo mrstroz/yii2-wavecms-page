@@ -4,6 +4,7 @@ use mrstroz\wavecms\base\helpers\FormHelper;
 use mrstroz\wavecms\base\helpers\WavecmsForm;
 use mrstroz\wavecms\base\widgets\CKEditorWidget;
 use mrstroz\wavecms\base\widgets\MetaTagsWidget;
+use mrstroz\wavecms\base\widgets\SubListWidget;
 use mrstroz\wavecms\base\widgets\TabsWidget;
 use mrstroz\wavecms\base\widgets\TabWidget;
 use yii\bootstrap\Html;
@@ -27,6 +28,15 @@ use yii\bootstrap\Html;
         </div>
     </div>
 </div>
+<?php TabWidget::end(); ?>
+
+<?php TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Slider')]); ?>
+
+<?php echo SubListWidget::widget([
+    'list_id' => 'home_slider',
+    'model' => $model
+]); ?>
+
 <?php TabWidget::end(); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Meta tags')]); ?>

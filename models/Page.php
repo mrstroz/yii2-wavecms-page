@@ -3,6 +3,7 @@
 namespace mrstroz\wavecms\page\models;
 
 use mrstroz\wavecms\base\behaviors\CheckboxListBehavior;
+use mrstroz\wavecms\base\behaviors\SubListBehavior;
 use mrstroz\wavecms\base\behaviors\TranslateBehavior;
 use Yii;
 use yii\db\ActiveQuery;
@@ -51,6 +52,12 @@ class Page extends \yii\db\ActiveRecord
             'checkbox_list' => [
                 'class' => CheckboxListBehavior::className(),
                 'fields' => ['languages']
+            ],
+            'home_slider' => [
+                'class' => SubListBehavior::className(),
+                'list_id' => 'home_slider',
+                'route' => '/page/home-slider/sub-list',
+                'parentField' => 'page_id'
             ],
             'translate' => [
                 'class' => TranslateBehavior::className(),

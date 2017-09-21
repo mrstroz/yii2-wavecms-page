@@ -15,12 +15,21 @@ class Module extends \yii\base\Module
         if (!isset($this->models['HomeLang'])) {
             $this->models['HomeLang'] = 'mrstroz\wavecms\page\models\PageLang';
         }
+
         if (!isset($this->models['Page'])) {
             $this->models['Page'] = 'mrstroz\wavecms\page\models\Page';
         }
         if (!isset($this->models['PageLang'])) {
             $this->models['PageLang'] = 'mrstroz\wavecms\page\models\PageLang';
         }
+
+        if (!isset($this->models['HomeSlider'])) {
+            $this->models['HomeSlider'] = 'mrstroz\wavecms\page\models\PageItem';
+        }
+        if (!isset($this->models['HomeSliderLang'])) {
+            $this->models['HomeSliderLang'] = 'mrstroz\wavecms\page\models\PageItemLang';
+        }
+
         if (!isset($this->models['Menu'])) {
             $this->models['Menu'] = 'mrstroz\wavecms\page\models\Menu';
         }

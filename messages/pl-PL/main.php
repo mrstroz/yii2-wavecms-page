@@ -10,5 +10,7 @@ return [
     'Format: <code>http://exmple.com/url-to-page</code> or <code>/url-to-page</code>' => 'Format: <code>http://exmple.com/link-do-strony</code> lub <code>/link-do-strony</code>',
     'Top menu' => 'Górne menu',
     'Bottom menu' => 'Dolne menu',
-    'Submenu' => 'Podmenu'
+    'Submenu' => 'Podmenu',
+    'Home slider' => 'Slider strona główna',
+    'Slider' => 'Slider'
 ];

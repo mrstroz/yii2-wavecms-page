@@ -47,13 +47,16 @@ Required
          'models' => [
             'Home' => 'mrstroz\wavecms\page\models\Page',
             'HomeLang' => 'mrstroz\wavecms\page\models\PageLang',
+            'HomeSlider' => 'mrstroz\wavecms\page\models\PageItem',
+            'HomeSliderLang' => 'mrstroz\wavecms\page\models\PageItemLang',
             'Page' => 'mrstroz\wavecms\page\models\Page',
-            'PageLang' => 'mrstroz\wavecms\page\models\PageLang',
+            'PageLang' => 'mrstroz\wavecms\page\models\PageLang', 
             'Menu' => 'mrstroz\wavecms\page\models\Menu',
             'MenuLang' => 'mrstroz\wavecms\page\models\MenuLang'
          ],
          'forms' => [
             'page/home' => '@backend/views/page/home/form.php',
+            'page/home-slider' => '@backend/views/page/home-slider/form.php',
             'page/text' => '@backend/views/page/text/form.php',
             'page/menu-top' => '@backend/views/page/menu-top/form.php',
             'page/menu-bottom' => '@backend/views/page/menu-bottom/form.php'
@@ -62,6 +65,8 @@ Required
     ],
 ],
 ```
+
+Form views can be overwritten by backend [themes](http://www.yiiframework.com/doc-2.0/guide-output-theming.html);
 
 2. Run migration 
 ```

@@ -4,33 +4,37 @@ namespace mrstroz\wavecms\page\models;
 
 use himiklab\sortablegrid\SortableGridBehavior;
 use mrstroz\wavecms\base\behaviors\CheckboxListBehavior;
-use mrstroz\wavecms\base\behaviors\SubListBehavior;
+use mrstroz\wavecms\base\behaviors\ImageBehavior;
 use mrstroz\wavecms\base\behaviors\TranslateBehavior;
 use Yii;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "menu".
+ * This is the model class for table "page_item".
  *
  * @property string $id
- * @property string $parent_id
- * @property string $type
+ * @property string $page_id
  * @property integer $publish
  * @property string $sort
+ * @property string $type
  * @property string $languages
- * @property string $page_id
+ * @property string $image
+ * @property string $link_page_id
  */
-class Menu extends ActiveRecord
+class PageItem extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'menu';
+        return 'page_item';
     }
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -38,24 +42,23 @@ class Menu extends ActiveRecord
                 'class' => SortableGridBehavior::className(),
                 'sortableAttribute' => 'sort'
             ],
-            'submenu' => [
-                'class' => SubListBehavior::className(),
-                'list_id' => 'submenu',
-                'route' => '/page/menu-children/sub-list',
-                'parentField' => 'parent_id'
-            ],
             'checkbox_list' => [
                 'class' => CheckboxListBehavior::className(),
                 'fields' => ['languages']
             ],
+            'image' => [
+                'class' => ImageBehavior::className(),
+                'attribute' => 'image',
+            ],
             'translate' => [
                 'class' => TranslateBehavior::className(),
                 'translationAttributes' => [
-                    'title', 'page_url'
+                    'title', 'text', 'link_page_url'
                 ]
             ],
         ];
     }
+
 
     /**
      * @inheritdoc
@@ -63,10 +66,11 @@ class Menu extends ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'publish', 'sort', 'page_id'], 'integer'],
-            [['type'], 'string', 'max' => 10],
-            [['title', 'page_url'], 'string', 'max' => 255],
-            [['languages', 'title'], 'required']
+            [['page_id', 'publish', 'sort', 'link_page_id'], 'integer'],
+            [['type', 'image'], 'string', 'max' => 255],
+            [['text'], 'string'],
+            [['languages', 'title'], 'required'],
+            [['title', 'link_page_url'], 'string', 'max' => 255],
         ];
     }
 
@@ -77,39 +81,39 @@ class Menu extends ActiveRecord
     {
         return [
             'id' => Yii::t('wavecms/base/main', 'ID'),
-            'parent_id' => Yii::t('wavecms/base/main', 'Parent ID'),
-            'type' => Yii::t('wavecms/base/main', 'Type'),
+            'page_id' => Yii::t('wavecms/base/main', 'Page'),
             'publish' => Yii::t('wavecms/base/main', 'Publish'),
             'sort' => Yii::t('wavecms/base/main', 'Sort'),
+            'type' => Yii::t('wavecms/base/main', 'Type'),
             'languages' => Yii::t('wavecms/base/main', 'Languages'),
-            'page_id' => Yii::t('wavecms/base/main', 'Page'),
-            'page_url' => Yii::t('wavecms/base/main', 'Url'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'menuLangTitle' => Yii::t('wavecms/base/main', 'Title'),
+            'image' => Yii::t('wavecms/base/main', 'Image'),
+            'link_page_id' => Yii::t('wavecms/base/main', 'Page'),
+            'link_page_url' => Yii::t('wavecms/base/main', 'Url'),
+            'pageItemLangTitle' => Yii::t('wavecms/base/main', 'Title'),
         ];
     }
 
     /**
      * @inheritdoc
-     * @return MenuQuery the active query used by this AR class.
+     * @return PageItemQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new MenuQuery(get_called_class());
+        return new PageItemQuery(get_called_class());
     }
 
     public function getTranslations()
     {
-        return $this->hasMany(MenuLang::className(), ['menu_id' => 'id']);
+        return $this->hasMany(PageItemLang::className(), ['page_item_id' => 'id']);
     }
 
     /**
      * Used in waveCMS grid column
      * @return ActiveQuery
      */
-    public function getMenuLang()
+    public function getPageItemLang()
     {
-        $query = $this->hasOne(MenuLang::className(), ['menu_id' => 'id']);
+        $query = $this->hasOne(PageItemLang::className(), ['page_item_id' => 'id']);
 
         if (Yii::$app->id === 'app-backend') {
             $query->andWhere(['language' => Yii::$app->wavecms->editedLanguage]);
@@ -124,10 +128,10 @@ class Menu extends ActiveRecord
      * Used in waveCMS grid column
      * @return bool|string
      */
-    public function getMenuLangTitle()
+    public function getPageItemLangTitle()
     {
-        if ($this->menuLang) {
-            return $this->menuLang->title;
+        if ($this->pageItemLang) {
+            return $this->pageItemLang->title;
         }
 
         return false;
