@@ -85,6 +85,7 @@ class PageItem extends \yii\db\ActiveRecord
             'publish' => Yii::t('wavecms/base/main', 'Publish'),
             'sort' => Yii::t('wavecms/base/main', 'Sort'),
             'type' => Yii::t('wavecms/base/main', 'Type'),
+            'title' => Yii::t('wavecms/base/main', 'Title'),
             'languages' => Yii::t('wavecms/base/main', 'Languages'),
             'image' => Yii::t('wavecms/base/main', 'Image'),
             'link_page_id' => Yii::t('wavecms/base/main', 'Page'),

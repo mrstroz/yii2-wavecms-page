@@ -3,6 +3,7 @@
 namespace mrstroz\wavecms\page\controllers;
 
 use mrstroz\wavecms\base\grid\ActionColumn;
+use mrstroz\wavecms\base\grid\LanguagesColumn;
 use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\grid\SortColumn;
 use mrstroz\wavecms\base\web\Controller;
@@ -32,16 +33,7 @@ class MenuTopController extends Controller
                 'attribute' => 'title',
             ],
             [
-                'attribute' => 'languages',
-                'content' => function ($data) {
-                    $column = '';
-                    if ($data->languages) {
-                        foreach ($data->languages as $lang) {
-                            $column .= '<span class="label label-default text-uppercase">' . $lang . '</span> ';
-                        }
-                    }
-                    return $column;
-                }
+                'class' => LanguagesColumn::className(),
             ],
             [
                 'class' => SortColumn::className(),
