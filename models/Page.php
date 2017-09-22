@@ -122,6 +122,15 @@ class Page extends \yii\db\ActiveRecord
     }
 
     /**
+     * PageItem relation
+     * @return ActiveQuery
+     */
+    public function getItems()
+    {
+        return $this->hasMany(PageItem::className(), ['page_id' => 'id']);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function validateUniqueLink($attribute)

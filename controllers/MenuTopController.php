@@ -7,9 +7,8 @@ use mrstroz\wavecms\base\grid\LanguagesColumn;
 use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\grid\SortColumn;
 use mrstroz\wavecms\base\web\Controller;
+use mrstroz\wavecms\page\models\Menu;
 use Yii;
-use yii\data\ActiveDataProvider;
-use yii\db\ActiveRecord;
 
 class MenuTopController extends Controller
 {
@@ -20,7 +19,7 @@ class MenuTopController extends Controller
             $this->viewForm = $this->module->forms['page/menu-top'];
         }
 
-        /** @var ActiveRecord $modelMenu */
+        /** @var Menu $modelMenu */
         $modelMenu = Yii::createObject($this->module->models['Menu']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Top menu');

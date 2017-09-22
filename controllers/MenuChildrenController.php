@@ -8,9 +8,8 @@ use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\grid\SortColumn;
 use mrstroz\wavecms\base\helpers\NavHelper;
 use mrstroz\wavecms\base\web\Controller;
+use mrstroz\wavecms\page\models\Menu;
 use Yii;
-use yii\data\ActiveDataProvider;
-use yii\db\ActiveRecord;
 
 class MenuChildrenController extends Controller
 {
@@ -21,7 +20,7 @@ class MenuChildrenController extends Controller
             $this->viewForm = $this->module->forms['page/menu-children'];
         }
 
-        /** @var ActiveRecord $modelMenu */
+        /** @var Menu $modelMenu */
         $modelMenu = Yii::createObject($this->module->models['Menu']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Submenu');

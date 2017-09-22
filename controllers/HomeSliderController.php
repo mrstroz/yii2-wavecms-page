@@ -7,8 +7,8 @@ use mrstroz\wavecms\base\grid\LanguagesColumn;
 use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\grid\SortColumn;
 use mrstroz\wavecms\base\web\Controller;
+use mrstroz\wavecms\page\models\PageItem;
 use Yii;
-use yii\db\ActiveRecord;
 
 class HomeSliderController extends Controller
 {
@@ -19,7 +19,7 @@ class HomeSliderController extends Controller
             $this->viewForm = $this->module->forms['page/home-slider'];
         }
 
-        /** @var ActiveRecord $modelMenu */
+        /** @var PageItem $modelMenu */
         $modelMenu = Yii::createObject($this->module->models['HomeSlider']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Slider');

@@ -2,11 +2,12 @@
 
 namespace mrstroz\wavecms\page\controllers;
 
-use mrstroz\wavecms\base\db\ActiveRecord;
 use mrstroz\wavecms\base\grid\ActionColumn;
 use mrstroz\wavecms\base\grid\LanguagesColumn;
 use mrstroz\wavecms\base\grid\PublishColumn;
 use mrstroz\wavecms\base\web\Controller;
+use mrstroz\wavecms\page\models\Page;
+use mrstroz\wavecms\page\models\PageLang;
 use mrstroz\wavecms\page\models\PageSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -20,14 +21,14 @@ class TextController extends Controller
             $this->viewForm = $this->module->forms['page/text'];
         }
 
-        /** @var ActiveRecord $modelPage */
+        /** @var Page $modelPage */
         $modelPage = Yii::createObject($this->module->models['Page']);
-        /** @var ActiveRecord $modelPageLang */
+        /** @var PageLang $modelPageLang */
         $modelPageLang = Yii::createObject($this->module->models['PageLang']);
 
         $this->heading = Yii::t('wavecms/page/main', 'Text pages');
         $this->query = $modelPage::find()
-            ->joinPageLang()
+            ->joinLang()
             ->andWhere(['type' => 'text']);
         $this->scenario = $modelPage::SCENARIO_TEXT;
 

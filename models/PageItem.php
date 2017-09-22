@@ -102,9 +102,23 @@ class PageItem extends \yii\db\ActiveRecord
         return new PageItemQuery(get_called_class());
     }
 
+    /**
+     * Required for Translate behaviour
+     * @return ActiveQuery
+     */
     public function getTranslations()
     {
         return $this->hasMany(PageItemLang::className(), ['page_item_id' => 'id']);
     }
+
+    /**
+     * Page relation
+     * @return ActiveQuery
+     */
+    public function getPage()
+    {
+        return $this->hasOne(Page::className(), ['id' => 'page_id']);
+    }
+
 
 }

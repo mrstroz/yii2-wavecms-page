@@ -36,27 +36,48 @@ class PageQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * This function is used in routing to get all available links for active pages
      * @return ActiveQuery
      */
     public function getLinks()
     {
         return $this
             ->select(['link'])
-            ->joinPageLang()
-            ->orFilterWhere(['and',
-                ['=', 'publish', '1'],
-                ['=', 'type', 'text'],
-                ['REGEXP', 'languages', '(^|;)(' . Yii::$app->language . ')(;|$)']
-            ]);
+            ->joinLang()
+            ->orFilterWhere($this->whereByType('text'));
     }
 
+    /**
+     * @param $type
+     * @return array Where array
+     */
+    public function whereByType($type)
+    {
+        return ['and',
+            '`link` IS NOT NULL',
+            '`link` != ""',
+            ['=', 'publish', '1'],
+            ['=', 'type', $type],
+            ['REGEXP', 'languages', '(^|;)(' . Yii::$app->language . ')(;|$)']
+        ];
+    }
+
+    /**
+     * getMap is using in yii2-wavefront-base extension in function Front::linkUrl
+     * @return $this
+     */
     public function getMap()
     {
         return $this
             ->select([Page::tableName() . '.id', PageLang::tableName() . '.link'])
-            ->joinPageLang();
+            ->joinLang();
     }
 
+    /**
+     * Get single page by link
+     * @param $link
+     * @return $this
+     */
     public function getByLink($link)
     {
         return $this
@@ -64,7 +85,12 @@ class PageQuery extends \yii\db\ActiveQuery
             ->andWhere(['link' => $link]);
     }
 
-    public function joinPageLang($language = null)
+    /**
+     * Join with language table by current language
+     * @param null $language
+     * @return $this
+     */
+    public function joinLang($language = null)
     {
         if (!$language) {
             if (Yii::$app->id === 'app-backend') {
