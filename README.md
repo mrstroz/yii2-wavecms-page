@@ -1,13 +1,7 @@
-UNDER DEV !!!
-=============
-
-
 # yii2-wavecms-page
-Page module for **WaveCMS**
+**Page module for [Yii 2 WaveCMS](https://github.com/mrstroz/yii2-wavecms).** 
 
-**This module required [Yii 2 WaveCMS User](https://github.com/mrstroz/yii2-wavecms-user).** 
-
-Please do all install steps first from [Yii 2 WaveCMS User](https://github.com/mrstroz/yii2-wavecms-user).
+Please do all install steps first from [Yii 2 WaveCMS](https://github.com/mrstroz/yii2-wavecms).
 
 Installation
 ------------
@@ -108,21 +102,24 @@ public function actionPage($link)
 
 1. Get menu by type
 ```php
+<?php 
 use mrstroz\wavecms\page\models\Menu;
 // ...
 $menu = Menu::find()->getMenu('top')->all();
+// ...
+?>
 ```
 
 2. Display menu in view. Required [waveFront Base](https://github.com/mrstroz/yii2-wavefront-base)
 ```php
 <?php 
-
 use mrstroz\wavefront\base\helpers\Front;
-
+// ...
 foreach ($menu as $one) {
     echo '<a href="'.Front::linkUrl($one->page_id, $one->page_url).'">'.$one->title.'</a>'; // or
     echo Front::link($one->page_id, $one->page_url, $one->title); 
 }
+// ...
 ?>
 ```
 
