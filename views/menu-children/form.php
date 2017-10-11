@@ -1,11 +1,11 @@
 <?php
 
-use mrstroz\wavecms\base\helpers\FormHelper;
-use mrstroz\wavecms\base\helpers\WavecmsForm;
-use mrstroz\wavecms\base\widgets\LanguagesWidget;
-use mrstroz\wavecms\base\widgets\PageLinkWidget;
-use mrstroz\wavecms\base\widgets\TabsWidget;
-use mrstroz\wavecms\base\widgets\TabWidget;
+use mrstroz\wavecms\components\helpers\FormHelper;
+use mrstroz\wavecms\components\helpers\WavecmsForm;
+use mrstroz\wavecms\components\widgets\LanguagesWidget;
+use mrstroz\wavecms\components\widgets\PageLinkWidget;
+use mrstroz\wavecms\components\widgets\TabsWidget;
+use mrstroz\wavecms\components\widgets\TabWidget;
 use yii\bootstrap\Html;
 
 ?>

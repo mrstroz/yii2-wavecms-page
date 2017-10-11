@@ -2,7 +2,7 @@
 
 namespace mrstroz\wavecms\page\controllers;
 
-use mrstroz\wavecms\base\web\Controller;
+use mrstroz\wavecms\components\web\Controller;
 use mrstroz\wavecms\page\models\Page;
 use mrstroz\wavecms\page\models\PageLang;
 use Yii;

@@ -2,7 +2,7 @@
 
 namespace mrstroz\wavecms\page;
 
-use mrstroz\wavecms\base\helpers\FontAwesome;
+use mrstroz\wavecms\components\helpers\FontAwesome;
 use Yii;
 use yii\base\BootstrapInterface;
 

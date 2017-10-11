@@ -3,9 +3,9 @@
 namespace mrstroz\wavecms\page\models;
 
 use himiklab\sortablegrid\SortableGridBehavior;
-use mrstroz\wavecms\base\behaviors\CheckboxListBehavior;
-use mrstroz\wavecms\base\behaviors\SubListBehavior;
-use mrstroz\wavecms\base\behaviors\TranslateBehavior;
+use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
+use mrstroz\wavecms\components\behaviors\SubListBehavior;
+use mrstroz\wavecms\components\behaviors\TranslateBehavior;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
