@@ -12,6 +12,8 @@ class HomeController extends Controller
 
     public function init()
     {
+        $this->type = 'page';
+
         /** @var Page $modelPage */
         $modelPage = Yii::createObject($this->module->models['Home']);
         /** @var PageLang $modelPageLang */

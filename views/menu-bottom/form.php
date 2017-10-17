@@ -45,14 +45,21 @@ use yii\bootstrap\Html;
 </div>
 <?php TabWidget::end(); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Submenu')]); ?>
 
-<?php echo SubListWidget::widget([
-    'listId' => 'submenu',
-    'model' => $model
-]); ?>
+<?php
+$settingsModel = Yii::createObject(Yii::$app->controller->module->models['Settings']);
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_bottom_submenu') === '1') {
 
-<?php TabWidget::end(); ?>
+    TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Submenu')]);
+
+    echo SubListWidget::widget([
+        'listId' => 'submenu',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
 
 <?php TabsWidget::end(); ?>
 <?php FormHelper::saveButton() ?>

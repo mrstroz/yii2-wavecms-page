@@ -37,6 +37,10 @@ class Module extends \yii\base\Module
             $this->models['MenuLang'] = 'mrstroz\wavecms\page\models\MenuLang';
         }
 
+        if (!isset($this->models['Settings'])) {
+            $this->models['Settings'] = 'mrstroz\wavecms\page\models\PageSettings';
+        }
+
         $this->controllerNamespace = 'mrstroz\wavecms\page\controllers';
 
         parent::init();

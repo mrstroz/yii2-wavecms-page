@@ -56,7 +56,11 @@ class Bootstrap implements BootstrapInterface
                     ],
                     ['label' => FontAwesome::icon('file-text-o') . Yii::t('wavecms/page/main', 'Text pages'),
                         'url' => ['/page/text/index']
+                    ],
+                    ['label' => FontAwesome::icon('cog') . Yii::t('wavecms/base/main', 'Settings'),
+                        'url' => ['/page/settings/settings']
                     ]
+
 
                 ]
             ];

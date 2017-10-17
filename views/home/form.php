@@ -30,14 +30,21 @@ use yii\bootstrap\Html;
 </div>
 <?php TabWidget::end(); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Slider')]); ?>
+<?php
+$settingsModel = Yii::createObject(Yii::$app->controller->module->models['Settings']);
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_slider') === '1') {
 
-<?php echo SubListWidget::widget([
-    'listId' => 'home_slider',
-    'model' => $model
-]); ?>
+    TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Slider')]);
 
-<?php TabWidget::end(); ?>
+    echo SubListWidget::widget([
+        'listId' => 'home_slider',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
+
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Meta tags')]); ?>
 <div class="row">

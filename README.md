@@ -46,18 +46,35 @@ Required
             'Page' => 'mrstroz\wavecms\page\models\Page',
             'PageLang' => 'mrstroz\wavecms\page\models\PageLang', 
             'Menu' => 'mrstroz\wavecms\page\models\Menu',
-            'MenuLang' => 'mrstroz\wavecms\page\models\MenuLang'
+            'MenuLang' => 'mrstroz\wavecms\page\models\MenuLang',
+            'Settings' => 'mrstroz\wavecms\page\models\Settings'
          ],
          'forms' => [
             'page/home' => '@backend/views/page/home/form.php',
             'page/home-slider' => '@backend/views/page/home-slider/form.php',
             'page/text' => '@backend/views/page/text/form.php',
             'page/menu-top' => '@backend/views/page/menu-top/form.php',
-            'page/menu-bottom' => '@backend/views/page/menu-bottom/form.php'
+            'page/menu-bottom' => '@backend/views/page/menu-bottom/form.php',
+            'page/settings' => '@backend/views/page/settings/form.php',
          ]
          */
     ],
 ],
+'controllerMap' => [
+    'elfinder' => [
+        'class' => 'mihaildev\elfinder\Controller',
+        'access' => ['@'],
+        'disabledCommands' => ['netmount'],
+        'roots' => [
+            [
+                'baseUrl'=>'@frontWeb',
+                'basePath'=>'@frontWebroot',
+                'path' => 'userfiles',
+                'name' => 'Files'
+            ]
+        ]
+    ]
+]
 ```
 
 Form views can be overwritten by backend [themes](http://www.yiiframework.com/doc-2.0/guide-output-theming.html);
@@ -74,6 +91,7 @@ Usage in frontend
 1. Add new rules to your urlManager. You can do it in one of your bootstrap classes
 
 ```php
+<?php
 use mrstroz\wavecms\page\models\Page;
 use Yii;
 // ...
@@ -86,6 +104,7 @@ Yii::$app->getUrlManager()->addRules([
 
 2. Get requested page by link in `page` action
 ```php
+<?php
 use mrstroz\wavecms\page\models\Page;
 // ...
 public function actionPage($link)
@@ -120,7 +139,17 @@ foreach ($menu as $one) {
     echo Front::link($one->page_id, $one->page_url, $one->title); 
 }
 // ...
-?>
+```
+
+#### Meta tags
+1. Register meta tags by `mrstroz\wavefront` helper
+```php
+<?php 
+use mrstroz\wavefront\base\helpers\MetaTags;
+// ...
+$page = Page::find()->getByLink($link)->one();
+MetaTags::register($page);
+
 ```
 
 
