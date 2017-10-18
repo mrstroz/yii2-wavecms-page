@@ -21,7 +21,7 @@ class Bootstrap implements BootstrapInterface
                 ],
             ];
 
-            Yii::$app->params['nav'][] = [
+            Yii::$app->params['nav']['menu'] = [
                 'label' => FontAwesome::icon('bars') . Yii::t('wavecms/page/main', 'Menu'),
                 'url' => 'javascript: ;',
                 'options' => [
@@ -41,7 +41,7 @@ class Bootstrap implements BootstrapInterface
                 ]
             ];
 
-            Yii::$app->params['nav'][] = [
+            Yii::$app->params['nav']['page'] = [
                 'label' => FontAwesome::icon('sitemap') . Yii::t('wavecms/page/main', 'Pages'),
                 'url' => 'javascript: ;',
                 'options' => [
