@@ -79,7 +79,39 @@ Required
 
 Form views can be overwritten by backend [themes](http://www.yiiframework.com/doc-2.0/guide-output-theming.html);
 
-2. Run migration 
+2. Update `frontend/config/main.php` (Yii2 advanced template) 
+
+```php
+'modules' => [
+    // ...
+    'sitemap' => [
+        'class' => 'himiklab\sitemap\Sitemap',
+        'models' => [
+            'mrstroz\wavecms\page\models\Page',
+        ],
+        'urls' => [
+            [
+                'loc' => ['/'],
+                'changefreq' => \himiklab\sitemap\behaviors\SitemapBehavior::CHANGEFREQ_DAILY,
+                'priority' => 1,
+                ]
+            ],
+            'cacheExpire' => 1
+        ]
+    ],
+],
+// ...
+'components' => [
+    'urlManager' => [
+        'rules' => [
+            // Add rule for sitemap.xml
+            ['pattern' => 'sitemap', 'route' => 'sitemap/default/index', 'suffix' => '.xml'],
+        ],
+    ],
+]
+```
+
+3. Run migration 
 ```
 yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms-page/migrations
 ```
@@ -98,7 +130,7 @@ use Yii;
 //Parse request to set language before run ActiveRecord::find()
 Yii::$app->urlManager->parseRequest(Yii::$app->request); 
 Yii::$app->getUrlManager()->addRules([
-    '<link:(' . implode('|', Page::find()->getLinks()->column()) . ')>' => 'site/page'
+    '<link:(' . implode('|', Page::find()->select(['link'])->byAllCriteria()->byType(['text'])->column()) . ')>' => 'site/page'
 ]);
 ```
 
@@ -151,6 +183,46 @@ $page = Page::find()->getByLink($link)->one();
 MetaTags::register($page);
 
 ```
+
+#### Add pages to sitemap
+According to [Sitemap module](https://github.com/himiklab/yii2-sitemap-module), we need to add behaviour to our AR model and then add model to sitemap module configuration (see frontend/config/main.php)
+```php
+use himiklab\sitemap\behaviors\SitemapBehavior;
+
+public function behaviors()
+{
+    return [
+        'sitemap' => [
+            'class' => SitemapBehavior::className(),
+            'scope' => function ($model) {
+                /** @var \yii\db\ActiveQuery $model */
+                $model->select(['url', 'lastmod']);
+                $model->andWhere(['is_deleted' => 0]);
+            },
+            'dataClosure' => function ($model) {
+                /** @var self $model */
+                return [
+                    'loc' => Url::to($model->url, true),
+                    'lastmod' => strtotime($model->lastmod),
+                    'changefreq' => SitemapBehavior::CHANGEFREQ_DAILY,
+                    'priority' => 0.8
+                ];
+            }
+        ],
+    ];
+}
+```
+
+
+Used packages
+-------------
+1. CKEditor https://github.com/MihailDev/yii2-ckeditor
+2. ElFinder https://github.com/MihailDev/yii2-elfinder
+3. Slugify https://github.com/modernkernel/yii2-slugify
+4. Select2 https://github.com/kartik-v/yii2-widget-select2 https://github.com/2amigos/yii2-select2-widget
+5. Datepicker https://github.com/kartik-v/yii2-widget-datepicker
+6. Switch widget https://github.com/2amigos/yii2-switch-widget
+7. Sitemap - https://github.com/himiklab/yii2-sitemap-module
 
 
 

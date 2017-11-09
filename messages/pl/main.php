@@ -16,4 +16,6 @@ return [
     'Slider' => 'Slider',
     'Top submenu' => 'Górne podmenu',
     'Bottom submenu' => 'Dolne podmenu',
+    'Template' => 'Szablon',
+    'Text page' => 'Strona tekstowa'
 ];

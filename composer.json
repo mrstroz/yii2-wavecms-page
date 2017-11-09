@@ -21,7 +21,8 @@
     "modernkernel/yii2-slugify": "*",
     "kartik-v/yii2-widget-select2": "@dev",
     "kartik-v/yii2-widget-datepicker": "@dev",
-    "2amigos/yii2-switch-widget": "~1.0"
+    "2amigos/yii2-switch-widget": "~1.0",
+    "himiklab/yii2-sitemap-module": "*"
   },
   "require-dev": {
     "php": ">=5.4.0",

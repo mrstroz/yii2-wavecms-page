@@ -6,10 +6,11 @@ use mrstroz\wavecms\components\helpers\WavecmsForm;
 use mrstroz\wavecms\components\widgets\CKEditorWidget;
 use mrstroz\wavecms\components\widgets\LanguagesWidget;
 use mrstroz\wavecms\components\widgets\MetaTagsWidget;
-use mrstroz\wavecms\components\widgets\PanelWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
 use yii\bootstrap\Html;
+
+/** @var \mrstroz\wavecms\page\models\Page $model */
 
 ?>
 
@@ -27,7 +28,17 @@ use yii\bootstrap\Html;
         <div class="row">
             <div class="col-md-8 col-lg-9">
                 <?php echo $form->field($model, 'title'); ?>
-                <?php echo $form->field($model, 'link')->widget(Slugify::className(), ['source' => '#page-title']) ?>
+                <div class="row">
+                    <div class="col-md-8">
+                        <?php echo $form->field($model, 'link')->widget(Slugify::className(), ['source' => '#page-title']) ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php echo $form->field($model, 'template')->dropDownList(
+                            array_merge(['' => Yii::t('wavecms/page/main', 'Text page')], $model::$templates)
+                        ); ?>
+                    </div>
+                </div>
+
             </div>
 
             <div class="col-md-4 col-lg-3">
