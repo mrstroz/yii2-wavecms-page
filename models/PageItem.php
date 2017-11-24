@@ -20,7 +20,7 @@ use yii\db\ActiveQuery;
  * @property string $languages
  * @property string $image
  * @property string $link_page_id
- * @property string $link_blank
+ * @property string $link_page_blank
  */
 class PageItem extends \yii\db\ActiveRecord
 {
@@ -91,6 +91,7 @@ class PageItem extends \yii\db\ActiveRecord
             'image' => Yii::t('wavecms/base/main', 'Image'),
             'link_page_id' => Yii::t('wavecms/base/main', 'Page'),
             'link_page_url' => Yii::t('wavecms/base/main', 'Url'),
+            'link_page_blank' => Yii::t('wavecms/base/main', 'New tab')
         ];
     }
 
