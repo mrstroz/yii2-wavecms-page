@@ -56,6 +56,16 @@ class TextController extends Controller
                 'attribute' => 'link',
             ],
             [
+                'attribute' => 'template',
+                'content' => function ($model, $key, $index, $column) {
+                    /** @var Page $model */
+                    if ($model->template && isset(Page::$templates[$model->template])) {
+                        return '<span class="label label-default">' . Page::$templates[$model->template] . '</span>';
+                    }
+                    return false;
+                },
+            ],
+            [
                 'class' => LanguagesColumn::className(),
             ],
             [

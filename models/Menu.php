@@ -7,7 +7,6 @@ use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\SubListBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
 use Yii;
-use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -20,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property string $sort
  * @property string $languages
  * @property string $page_id
+ * @property string $page_blank
  */
 class Menu extends ActiveRecord
 {
@@ -63,7 +63,7 @@ class Menu extends ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'publish', 'sort', 'page_id'], 'integer'],
+            [['parent_id', 'publish', 'sort', 'page_id', 'page_blank'], 'integer'],
             [['type'], 'string', 'max' => 10],
             [['title', 'page_url'], 'string', 'max' => 255],
             [['languages', 'title'], 'required']
@@ -85,6 +85,7 @@ class Menu extends ActiveRecord
             'page_id' => Yii::t('wavecms/base/main', 'Page'),
             'page_url' => Yii::t('wavecms/base/main', 'Url'),
             'title' => Yii::t('wavecms/base/main', 'Title'),
+            'page_blank' => Yii::t('wavecms/base/main', 'New tab'),
         ];
     }
 

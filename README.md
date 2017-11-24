@@ -112,7 +112,24 @@ Form views can be overwritten by backend [themes](http://www.yiiframework.com/do
 ```
 
 3. Run migration 
+
+Add the `migrationPath` in `console/config/main.php` and run `yii migrate`:
+
+```php
+// Add migrationPaths to console config:
+'controllerMap' => [
+    'migrate' => [
+        'class' => 'yii\console\controllers\MigrateController',
+        'migrationPath' => [
+            '@vendor/mrstroz/yii2-wavecms-page/migrations'  
+        ],
+    ],
+],
 ```
+
+Or run migrates directly
+
+```yii
 yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms-page/migrations
 ```
 
@@ -149,6 +166,31 @@ public function actionPage($link)
 }
 ```
 
+#### Page templates
+1. Add new template to `Page` model in `common\config\bootstrap.php`
+```php
+<?php 
+use mrstroz\wavecms\page\models\Page;
+// ... 
+Page::$templates['contact'] = Yii::t('app', 'Contact');
+
+```
+
+2. Use in frontend to display different view
+```php
+<?php
+use mrstroz\wavecms\page\models\Page;
+// ...
+public function actionPage($link)
+{
+    $page = Page::find()->getByLink($link)->one();
+
+    $this->render($page->template, [
+        'page' => $page
+    ]);
+}
+```
+
 #### Menu
 
 1. Get menu by type
@@ -161,23 +203,25 @@ $menu = Menu::find()->getMenu('top')->all();
 ?>
 ```
 
-2. Display menu in view. Required [waveFront Base](https://github.com/mrstroz/yii2-wavefront-base)
+2. Display menu in view. 
 ```php
 <?php 
-use mrstroz\wavefront\base\helpers\Front;
+use mrstroz\wavecms\page\components\helpers\Front;
 // ...
+/** @var \mrstroz\wavecms\page\models\Menu $menu */
 foreach ($menu as $one) {
     echo '<a href="'.Front::linkUrl($one->page_id, $one->page_url).'">'.$one->title.'</a>'; // or
-    echo Front::link($one->page_id, $one->page_url, $one->title); 
+    echo Front::link($one, $one->title); 
 }
 // ...
 ```
 
 #### Meta tags
-1. Register meta tags by `mrstroz\wavefront` helper
+1. Register meta tags by `Front` helper
 ```php
-<?php 
-use mrstroz\wavefront\base\helpers\MetaTags;
+<?php
+use mrstroz\wavecms\page\models\Page; 
+use mrstroz\wavecms\page\components\helpers\MetaTags;
 // ...
 $page = Page::find()->getByLink($link)->one();
 MetaTags::register($page);
