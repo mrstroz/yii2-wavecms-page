@@ -15,28 +15,26 @@ class MetaTags extends Component
      */
     public static function register($metaTags)
     {
-        if ($metaTags instanceof ActiveRecord) {
-            $metaTags = $metaTags->toArray();
-        }
 
-        if (is_array($metaTags)) {
-            if (isset($metaTags['meta_title'])) {
-                Yii::$app->view->title = $metaTags['meta_title'];
+        if ($metaTags instanceof ActiveRecord) {
+            if (isset($metaTags->meta_title)) {
+                Yii::$app->view->title = $metaTags->meta_title;
             }
 
-            if (isset($metaTags['meta_description'])) {
+            if (isset($metaTags->meta_description)) {
                 Yii::$app->view->registerMetaTag([
                     'name' => 'description',
-                    'content' => $metaTags['meta_description'],
+                    'content' => $metaTags->meta_description,
                 ]);
             }
 
-            if (isset($metaTags['meta_keywords'])) {
+            if (isset($metaTags->meta_keywords)) {
                 Yii::$app->view->registerMetaTag([
                     'name' => 'keywords',
-                    'content' => $metaTags['meta_keywords'],
+                    'content' => $metaTags->meta_keywords,
                 ]);
             }
         }
+
     }
 }
