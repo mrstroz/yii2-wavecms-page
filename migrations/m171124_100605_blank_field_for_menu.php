@@ -13,6 +13,7 @@ class m171124_100605_blank_field_for_menu extends Migration
     public function safeUp()
     {
         $this->addColumn('menu', 'page_blank', $this->boolean()->after('page_id'));
+        $this->addColumn('page_item', 'link_page_blank', $this->boolean()->after('link_page_id'));
 
     }
 

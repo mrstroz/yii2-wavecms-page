@@ -20,6 +20,7 @@ use yii\db\ActiveQuery;
  * @property string $languages
  * @property string $image
  * @property string $link_page_id
+ * @property string $link_blank
  */
 class PageItem extends \yii\db\ActiveRecord
 {
@@ -66,7 +67,7 @@ class PageItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'publish', 'sort', 'link_page_id'], 'integer'],
+            [['page_id', 'publish', 'sort', 'link_page_id','link_page_blank'], 'integer'],
             [['type', 'image'], 'string', 'max' => 255],
             [['text'], 'string'],
             [['languages', 'title'], 'required'],

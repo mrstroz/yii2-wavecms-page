@@ -31,7 +31,8 @@ use yii\bootstrap\Html;
                     'form' => $form,
                     'model' => $model,
                     'idAttribute' => 'link_page_id',
-                    'urlAttribute' => 'link_page_url'
+                    'urlAttribute' => 'link_page_url',
+                    'blankAttribute' => 'link_page_blank',
                 ]); ?>
 
                 <?= $form->field($model, 'text')->widget(CKEditorWidget::className()) ?>
