@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Run
 
 ```
-composer require --prefer-source "mrstroz/yii2-wavecms_page" "dev-master"
+composer require --prefer-source "mrstroz/yii2-wavecms_page" "~0.1.0"
 ```
 
 or add
 
 ```
-"mrstroz/yii2-wavecms_page": "dev-master"
+"mrstroz/yii2-wavecms_page": "~0.1.0"
 ```
 
 to the require section of your `composer.json` file.
@@ -109,6 +109,66 @@ Or run migrates directly
 
 ```yii
 yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms_page/migrations
+```
+
+
+Overriding classes
+------------------
+Classes can be overridden by:
+1. `classMap` attribute for WaveCMS module
+```php
+'modules' => [
+    // ...   
+    'wavecms-page' => [
+        'class' => 'mrstroz\wavecms\page\Module',
+        'classMap' => [
+            'Page' => \common\models\Page::class
+        ]
+    ],
+],
+```
+
+2. Yii2 Dependency Injection configuration in `backend/config/main.php`
+```php
+'container' => [
+    'definitions' => [
+        mrstroz\wavecms\page\models\Page::class => common\models\Page::class
+    ],
+],
+```
+
+Overriding controllers
+----------------------
+Use `controllerMap` attribute for WaveCMS module to override controllers
+```php
+'modules' => [
+    // ...   
+    'wavecms' => [
+        'class' => 'mrstroz\wavecms\Module',
+        'controllerMap' => [
+            'text' => 'backend\controllers\TextController'
+        ]
+    ],
+],
+```
+
+Overriding views
+--------------
+Use **[themes](http://www.yiiframework.com/doc-2.0/guide-output-theming.html)** for override views
+```php
+'components' => [
+    // ...
+    'view' => [
+        'theme' => [
+            'basePath' => '@app/themes/basic',
+            'baseUrl' => '@web/themes/basic',
+            'pathMap' => [
+                '@wavecms/views' => '@app/themes/basic',
+            ],
+        ],
+    ],
+    // ...
+],
 ```
 
 Usage in frontend
@@ -221,6 +281,12 @@ Used packages
 5. Datepicker https://github.com/kartik-v/yii2-widget-datepicker
 6. Switch widget https://github.com/2amigos/yii2-switch-widget
 7. Sitemap - https://github.com/himiklab/yii2-sitemap-module
+
+
+> ![INWAVE LOGO](http://inwave.pl/html/img/logo.png)  
+> INWAVE - Internet Software House  
+> [inwave.eu](http://inwave.eu/)
+
 
 
 
