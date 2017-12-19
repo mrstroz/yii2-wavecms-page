@@ -3,9 +3,9 @@
 use mrstroz\wavecms\components\helpers\FormHelper;
 use mrstroz\wavecms\components\helpers\WavecmsForm;
 use mrstroz\wavecms\components\widgets\LanguagesWidget;
-use mrstroz\wavecms\components\widgets\PageLinkWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
+use mrstroz\wavecms\page\components\widgets\PageLinkWidget;
 use yii\bootstrap\Html;
 
 ?>
@@ -16,7 +16,7 @@ use yii\bootstrap\Html;
 
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'children']); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
 
     <div class="col-md-12">

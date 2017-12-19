@@ -7,7 +7,7 @@ class m170921_073526_page_item_table extends Migration
     public function safeUp()
     {
 
-        $this->createTable('page_item', [
+        $this->createTable('{{%page_item}}', [
             'id' => $this->primaryKey()->unsigned()->notNull(),
             'page_id' => $this->bigInteger(),
             'publish' => $this->boolean(),
@@ -18,7 +18,7 @@ class m170921_073526_page_item_table extends Migration
             'link_page_id' => $this->bigInteger()
         ]);
 
-        $this->createTable('page_item_lang', [
+        $this->createTable('{{%page_item_lang}}', [
             'id' => $this->primaryKey()->unsigned()->notNull(),
             'page_item_id' => $this->bigInteger()->unsigned()->notNull(),
             'language' => $this->string(10),
@@ -27,16 +27,15 @@ class m170921_073526_page_item_table extends Migration
             'link_page_url' => $this->string()
         ]);
 
-        $this->createIndex('page_id', 'page_item', ['page_id']);
-        $this->createIndex('page_item_id', 'page_item_lang', ['page_item_id']);
+        $this->createIndex('page_id', '{{%page_item}}', ['page_id']);
+        $this->createIndex('page_item_id', '{{%page_item_lang}}', ['page_item_id']);
 
     }
 
     public function safeDown()
     {
-        echo "m170921_073526_page_item_table cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('{{%page_item}}');
+        $this->dropTable('{{%page_item_lang}}');
     }
 
     /*

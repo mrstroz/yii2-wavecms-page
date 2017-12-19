@@ -1,15 +1,16 @@
 <?php
 
-namespace mrstroz\wavecms\page\models;
+namespace mrstroz\wavecms\page\models\query;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[Menu]].
  *
  * @see Menu
  */
-class MenuQuery extends \yii\db\ActiveQuery
+class MenuQuery extends ActiveQuery
 {
     /*public function active()
     {

@@ -1,13 +1,13 @@
 <?php
 
-use modernkernel\slugify\Slugify;
 use mrstroz\wavecms\components\helpers\FormHelper;
 use mrstroz\wavecms\components\helpers\WavecmsForm;
 use mrstroz\wavecms\components\widgets\CKEditorWidget;
 use mrstroz\wavecms\components\widgets\LanguagesWidget;
-use mrstroz\wavecms\components\widgets\MetaTagsWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
+use mrstroz\wavecms\page\components\widgets\MetaTagsWidget;
+use powerkernel\slugify\Slugify;
 use yii\bootstrap\Html;
 
 /** @var \mrstroz\wavecms\page\models\Page $model */
@@ -20,7 +20,7 @@ use yii\bootstrap\Html;
 
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'text']); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
 
     <div class="col-md-12">
@@ -34,7 +34,7 @@ use yii\bootstrap\Html;
                     </div>
                     <div class="col-md-4">
                         <?php echo $form->field($model, 'template')->dropDownList(
-                            array_merge(['' => Yii::t('wavecms/page/main', 'Text page')], $model::$templates)
+                            array_merge(['' => Yii::t('wavecms_page/main', 'Text page')], $model::$templates)
                         ); ?>
                     </div>
                 </div>
@@ -59,10 +59,10 @@ use yii\bootstrap\Html;
 </div>
 <?php TabWidget::end(); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Meta tags')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Meta tags')]); ?>
 <div class="row">
     <div class="col-md-12">
-        <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
+        <?php // echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
     </div>
 </div>
 <?php TabWidget::end(); ?>

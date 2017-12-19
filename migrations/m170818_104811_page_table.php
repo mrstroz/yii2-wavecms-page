@@ -26,10 +26,7 @@ class m170818_104811_page_table extends Migration
             'language' => $this->string(10),
             'title' => $this->string(),
             'link' => $this->string(),
-            'text' => $this->text(),
-            'meta_title' => $this->string(),
-            'meta_description' => $this->string(),
-            'meta_keywords' => $this->string()
+            'text' => $this->text()
         ], $tableOptions);
 
         $this->createIndex('page_id', '{{%page_lang}}', ['page_id']);
@@ -43,7 +40,7 @@ class m170818_104811_page_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('page');
-        $this->dropTable('page_lang');
+        $this->dropTable('{{%page}}');
+        $this->dropTable('{{%page_lang}}');
     }
 }

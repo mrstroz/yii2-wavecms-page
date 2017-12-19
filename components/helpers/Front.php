@@ -3,6 +3,7 @@
 namespace mrstroz\wavecms\page\components\helpers;
 
 use mrstroz\wavecms\page\models\Page;
+use Yii;
 use yii\base\Component;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -52,11 +53,13 @@ class Front extends Component
      * @param $pageId
      * @param $pageUrl
      * @return string
+     * @throws \yii\base\InvalidConfigException
      */
     public static function linkUrl($pageId, $pageUrl)
     {
         if (self::$pages === null) {
-            self::$pages = ArrayHelper::map(Page::find()->getMap()->asArray()->all(), 'id', 'link');
+            $modelPage = Yii::createObject(Page::class);
+            self::$pages = ArrayHelper::map($modelPage::find()->getMap()->asArray()->all(), 'id', 'link');
         }
 
         if ($pageUrl) {
@@ -82,11 +85,12 @@ class Front extends Component
      * Display link by page
      * @param Page $page
      * @param $text
-     * @param array $fields
      * @param array $options
+     * @param array $fields
      * @return bool|string
+     * @throws \yii\base\InvalidConfigException
      */
-    public static function link($page, $text, array $fields = [], $options = [])
+    public static function link($page, $text, array $options = [], array $fields = [])
     {
         if ($page instanceof ActiveRecord) {
             if (!$fields) {

@@ -1,4 +1,4 @@
-# yii2-wavecms-page
+# yii2-wavecms_page
 **Page module for [Yii 2 WaveCMS](https://github.com/mrstroz/yii2-wavecms).** 
 
 Please do all install steps first from [Yii 2 WaveCMS](https://github.com/mrstroz/yii2-wavecms).
@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Run
 
 ```
-composer require --prefer-source "mrstroz/yii2-wavecms-page" "dev-master"
+composer require --prefer-source "mrstroz/yii2-wavecms_page" "dev-master"
 ```
 
 or add
 
 ```
-"mrstroz/yii2-wavecms-page": "dev-master"
+"mrstroz/yii2-wavecms_page": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
@@ -28,36 +28,16 @@ Required
 
 1. Update `backend/config/main.php` (Yii2 advanced template) 
 ```php
-'bootstrap' => [
-    // ...
-    'mrstroz\wavecms\page\Bootstrap'
-],
 'modules' => [
     // ...
-    'page' => [
+    'wavecms-page' => [
         'class' => 'mrstroz\wavecms\page\Module',
         /*
-         * Overwrite model classes and form views
-         'models' => [
-            'Home' => 'mrstroz\wavecms\page\models\Page',
-            'HomeLang' => 'mrstroz\wavecms\page\models\PageLang',
-            'HomeSlider' => 'mrstroz\wavecms\page\models\PageItem',
-            'HomeSliderLang' => 'mrstroz\wavecms\page\models\PageItemLang',
-            'Page' => 'mrstroz\wavecms\page\models\Page',
-            'PageLang' => 'mrstroz\wavecms\page\models\PageLang', 
-            'Menu' => 'mrstroz\wavecms\page\models\Menu',
-            'MenuLang' => 'mrstroz\wavecms\page\models\MenuLang',
-            'Settings' => 'mrstroz\wavecms\page\models\Settings'
-         ],
-         'forms' => [
-            'page/home' => '@backend/views/page/home/form.php',
-            'page/home-slider' => '@backend/views/page/home-slider/form.php',
-            'page/text' => '@backend/views/page/text/form.php',
-            'page/menu-top' => '@backend/views/page/menu-top/form.php',
-            'page/menu-bottom' => '@backend/views/page/menu-bottom/form.php',
-            'page/settings' => '@backend/views/page/settings/form.php',
-         ]
-         */
+         * Override classes
+        'classMap' => [
+            'Page' => 'common\models\Page',
+        ]
+        */
     ],
 ],
 'controllerMap' => [
@@ -83,7 +63,6 @@ Form views can be overwritten by backend [themes](http://www.yiiframework.com/do
 
 ```php
 'modules' => [
-    // ...
     'sitemap' => [
         'class' => 'himiklab\sitemap\Sitemap',
         'models' => [
@@ -94,11 +73,10 @@ Form views can be overwritten by backend [themes](http://www.yiiframework.com/do
                 'loc' => ['/'],
                 'changefreq' => \himiklab\sitemap\behaviors\SitemapBehavior::CHANGEFREQ_DAILY,
                 'priority' => 1,
-                ]
-            ],
-            'cacheExpire' => 1
-        ]
-    ],
+            ]
+        ],
+        'cacheExpire' => 1
+    ]
 ],
 // ...
 'components' => [
@@ -121,7 +99,7 @@ Add the `migrationPath` in `console/config/main.php` and run `yii migrate`:
     'migrate' => [
         'class' => 'yii\console\controllers\MigrateController',
         'migrationPath' => [
-            '@vendor/mrstroz/yii2-wavecms-page/migrations'  
+            '@vendor/mrstroz/yii2-wavecms_page/migrations'  
         ],
     ],
 ],
@@ -130,7 +108,7 @@ Add the `migrationPath` in `console/config/main.php` and run `yii migrate`:
 Or run migrates directly
 
 ```yii
-yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms-page/migrations
+yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms_page/migrations
 ```
 
 Usage in frontend
@@ -145,9 +123,10 @@ use mrstroz\wavecms\page\models\Page;
 use Yii;
 // ...
 //Parse request to set language before run ActiveRecord::find()
-Yii::$app->urlManager->parseRequest(Yii::$app->request); 
+Yii::$app->urlManager->parseRequest(Yii::$app->request);
+$modelPage = Yii::createObject(Page::class);
 Yii::$app->getUrlManager()->addRules([
-    '<link:(' . implode('|', Page::find()->select(['link'])->byAllCriteria()->byType(['text'])->column()) . ')>' => 'site/page'
+    '<link:(' . implode('|', $modelPage::find()->select(['link'])->byAllCriteria()->byType(['text'])->column()) . ')>' => 'site/page'
 ]);
 ```
 
@@ -159,36 +138,19 @@ use mrstroz\wavecms\page\models\Page;
 public function actionPage($link)
 {
     $page = Page::find()->getByLink($link)->one();
-
-    $this->render('page', [
+    $this->render($page->template ?: 'page', [
         'page' => $page
     ]);
 }
 ```
 
-#### Page templates
-1. Add new template to `Page` model in `common\config\bootstrap.php`
+3. Add new templates to `Page` model in `common\config\bootstrap.php`
 ```php
 <?php 
 use mrstroz\wavecms\page\models\Page;
 // ... 
 Page::$templates['contact'] = Yii::t('app', 'Contact');
 
-```
-
-2. Use in frontend to display different view
-```php
-<?php
-use mrstroz\wavecms\page\models\Page;
-// ...
-public function actionPage($link)
-{
-    $page = Page::find()->getByLink($link)->one();
-
-    $this->render($page->template, [
-        'page' => $page
-    ]);
-}
 ```
 
 #### Menu
@@ -217,16 +179,8 @@ foreach ($menu as $one) {
 ```
 
 #### Meta tags
-1. Register meta tags by `Front` helper
-```php
-<?php
-use mrstroz\wavecms\page\models\Page; 
-use mrstroz\wavecms\page\components\helpers\MetaTags;
-// ...
-$page = Page::find()->getByLink($link)->one();
-MetaTags::register($page);
+See yii2-wavecms-metatags
 
-```
 
 #### Add pages to sitemap
 According to [Sitemap module](https://github.com/himiklab/yii2-sitemap-module), we need to add behaviour to our AR model and then add model to sitemap module configuration (see frontend/config/main.php)
@@ -262,8 +216,8 @@ Used packages
 -------------
 1. CKEditor https://github.com/MihailDev/yii2-ckeditor
 2. ElFinder https://github.com/MihailDev/yii2-elfinder
-3. Slugify https://github.com/modernkernel/yii2-slugify
-4. Select2 https://github.com/kartik-v/yii2-widget-select2 https://github.com/2amigos/yii2-select2-widget
+3. Slugify https://github.com/powerkernel/yii2-slugify
+4. Select2 https://github.com/kartik-v/yii2-widget-select2
 5. Datepicker https://github.com/kartik-v/yii2-widget-datepicker
 6. Switch widget https://github.com/2amigos/yii2-switch-widget
 7. Sitemap - https://github.com/himiklab/yii2-sitemap-module

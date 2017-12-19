@@ -1,13 +1,15 @@
 <?php
 
-namespace mrstroz\wavecms\page\models;
+namespace mrstroz\wavecms\page\models\query;
+
+use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[PageItem]].
+ * This is the ActiveQuery class for [[MenuLang]].
  *
- * @see PageItem
+ * @see MenuLang
  */
-class PageItemQuery extends \yii\db\ActiveQuery
+class MenuLangQuery extends ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +18,7 @@ class PageItemQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return PageItem[]|array
+     * @return MenuLang[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +27,7 @@ class PageItemQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return PageItem|array|null
+     * @return MenuLang|array|null
      */
     public function one($db = null)
     {

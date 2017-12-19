@@ -1,13 +1,15 @@
 <?php
 
-namespace mrstroz\wavecms\page\models;
+namespace mrstroz\wavecms\page\models\query;
+
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[PageLang]].
  *
  * @see PageLang
  */
-class PageLangQuery extends \yii\db\ActiveQuery
+class PageLangQuery extends ActiveQuery
 {
     /*public function active()
     {

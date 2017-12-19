@@ -16,14 +16,14 @@ use yii\bootstrap\Html;
 
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'text']); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
 
     <div class="col-md-12">
 
         <div class="row">
             <div class="col-md-6">
-                <?php PanelWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Menu')]); ?>
+                <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Menu')]); ?>
                 <div class="row">
                     <div class="col-md-6">
                         <?php echo $form->field($model, 'is_top_submenu')
@@ -51,7 +51,7 @@ use yii\bootstrap\Html;
                 <?php PanelWidget::end(); ?>
             </div>
             <div class="col-md-6">
-                <?php PanelWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Pages')]); ?>
+                <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Pages')]); ?>
                 <?php echo $form->field($model, 'is_home_slider')->widget(SwitchBox::className(), [
                     'options' => [
                         'label' => false

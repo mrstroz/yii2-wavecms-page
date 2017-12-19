@@ -3,10 +3,11 @@
 use mrstroz\wavecms\components\helpers\FormHelper;
 use mrstroz\wavecms\components\helpers\WavecmsForm;
 use mrstroz\wavecms\components\widgets\LanguagesWidget;
-use mrstroz\wavecms\components\widgets\PageLinkWidget;
 use mrstroz\wavecms\components\widgets\SubListWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
+use mrstroz\wavecms\page\components\widgets\PageLinkWidget;
+use mrstroz\wavecms\page\models\PageSettings;
 use yii\bootstrap\Html;
 
 ?>
@@ -17,7 +18,7 @@ use yii\bootstrap\Html;
 
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'top']); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
 
     <div class="col-md-12">
@@ -46,10 +47,10 @@ use yii\bootstrap\Html;
 <?php TabWidget::end(); ?>
 
 <?php
-$settingsModel = Yii::createObject(Yii::$app->controller->module->models['Settings']);
+$settingsModel = Yii::createObject(PageSettings::class);
 if (Yii::$app->settings->get($settingsModel->formName(), 'is_top_submenu') === '1') {
 
-    TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Submenu')]);
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Submenu')]);
 
     echo SubListWidget::widget([
         'listId' => 'submenu',

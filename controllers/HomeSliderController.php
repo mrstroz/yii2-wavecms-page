@@ -15,14 +15,10 @@ class HomeSliderController extends Controller
 
     public function init()
     {
-        if (isset($this->module->forms['page/home-slider'])) {
-            $this->viewForm = $this->module->forms['page/home-slider'];
-        }
-
         /** @var PageItem $modelMenu */
-        $modelMenu = Yii::createObject($this->module->models['HomeSlider']);
+        $modelMenu = Yii::createObject(PageItem::class);
 
-        $this->heading = Yii::t('wavecms/page/main', 'Slider');
+        $this->heading = Yii::t('wavecms_page/main', 'Slider');
         $this->query = $modelMenu::find()->andWhere(['type' => 'home-slider']);
 
         $this->sort = true;

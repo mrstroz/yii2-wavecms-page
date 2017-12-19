@@ -16,14 +16,10 @@ class MenuChildrenController extends Controller
 
     public function init()
     {
-        if (isset($this->module->forms['page/menu-children'])) {
-            $this->viewForm = $this->module->forms['page/menu-children'];
-        }
-
         /** @var Menu $modelMenu */
-        $modelMenu = Yii::createObject($this->module->models['Menu']);
+        $modelMenu = Yii::createObject(Menu::class);
 
-        $this->heading = Yii::t('wavecms/page/main', 'Submenu');
+        $this->heading = Yii::t('wavecms_page/main', 'Submenu');
         $this->query = $modelMenu::find()->andWhere(['type' => 'children']);
 
         $this->sort = true;

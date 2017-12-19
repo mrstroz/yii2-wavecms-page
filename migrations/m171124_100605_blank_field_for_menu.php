@@ -12,8 +12,8 @@ class m171124_100605_blank_field_for_menu extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('menu', 'page_blank', $this->boolean()->after('page_id'));
-        $this->addColumn('page_item', 'link_page_blank', $this->boolean()->after('link_page_id'));
+        $this->addColumn('{{%menu}}', 'page_blank', $this->boolean()->after('page_id'));
+        $this->addColumn('{{%page_item}}', 'link_page_blank', $this->boolean()->after('link_page_id'));
 
     }
 
@@ -22,9 +22,8 @@ class m171124_100605_blank_field_for_menu extends Migration
      */
     public function safeDown()
     {
-        echo "m171124_100605_blank_field_for_menu cannot be reverted.\n";
-
-        return false;
+       $this->dropColumn('{{%menu}}','page_blank');
+       $this->dropColumn('{{%page_item}}','link_page_blank');
     }
 
     /*

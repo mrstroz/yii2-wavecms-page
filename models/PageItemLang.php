@@ -2,6 +2,7 @@
 
 namespace mrstroz\wavecms\page\models;
 
+use mrstroz\wavecms\page\models\query\PageItemLangQuery;
 use Yii;
 
 /**
@@ -43,12 +44,12 @@ class PageItemLang extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('wavecms/base/main', 'ID'),
-            'page_item_id' => Yii::t('wavecms/base/main', 'Page Item ID'),
-            'language' => Yii::t('wavecms/base/main', 'Language'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'text' => Yii::t('wavecms/base/main', 'Text'),
-            'link_page_url' => Yii::t('wavecms/base/main', 'Url'),
+            'id' => Yii::t('wavecms_page/main', 'ID'),
+            'page_item_id' => Yii::t('wavecms_page/main', 'Page Item ID'),
+            'language' => Yii::t('wavecms_page/main', 'Language'),
+            'title' => Yii::t('wavecms_page/main', 'Title'),
+            'text' => Yii::t('wavecms_page/main', 'Text'),
+            'link_page_url' => Yii::t('wavecms_page/main', 'Url'),
         ];
     }
 

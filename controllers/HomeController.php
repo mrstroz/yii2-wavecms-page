@@ -15,11 +15,11 @@ class HomeController extends Controller
         $this->type = 'page';
 
         /** @var Page $modelPage */
-        $modelPage = Yii::createObject($this->module->models['Home']);
+        $modelPage = Yii::createObject(Page::class);
         /** @var PageLang $modelPageLang */
-        $modelPageLang = Yii::createObject($this->module->models['HomeLang']);
+        $modelPageLang = Yii::createObject(PageLang::class);
 
-        $this->heading = Yii::t('wavecms/page/main', 'Home page');
+        $this->heading = Yii::t('wavecms_page/main', 'Home page');
         $this->query = $modelPage::find()
             ->joinLang()
             ->andWhere(['type' => 'home']);

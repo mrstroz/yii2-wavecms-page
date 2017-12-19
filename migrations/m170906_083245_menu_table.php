@@ -7,7 +7,7 @@ class m170906_083245_menu_table extends Migration
     public function safeUp()
     {
 
-        $this->createTable('menu', [
+        $this->createTable('{{%menu}}', [
             'id' => $this->primaryKey()->unsigned()->notNull(),
             'parent_id' => $this->bigInteger(),
             'type' => $this->string(10),
@@ -17,7 +17,7 @@ class m170906_083245_menu_table extends Migration
             'page_id' => $this->bigInteger()
         ]);
 
-        $this->createTable('menu_lang', [
+        $this->createTable('{{%menu_lang}}', [
             'id' => $this->primaryKey()->unsigned()->notNull(),
             'menu_id' => $this->bigInteger(),
             'language' => $this->string(10),
@@ -28,9 +28,8 @@ class m170906_083245_menu_table extends Migration
 
     public function safeDown()
     {
-        echo "m170906_083245_menu_table cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('{{%menu}}');
+        $this->dropTable('{{%menu_lang}}');
     }
 
     /*

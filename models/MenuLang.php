@@ -2,6 +2,7 @@
 
 namespace mrstroz\wavecms\page\models;
 
+use mrstroz\wavecms\page\models\query\MenuLangQuery;
 use Yii;
 
 /**
@@ -41,11 +42,11 @@ class MenuLang extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('wavecms/base/main', 'ID'),
-            'menu_id' => Yii::t('wavecms/base/main', 'Menu ID'),
-            'language' => Yii::t('wavecms/base/main', 'Language'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'page_url' => Yii::t('wavecms/base/main', 'Url'),
+            'id' => Yii::t('wavecms_page/main', 'ID'),
+            'menu_id' => Yii::t('wavecms_page/main', 'Menu ID'),
+            'language' => Yii::t('wavecms_page/main', 'Language'),
+            'title' => Yii::t('wavecms_page/main', 'Title'),
+            'page_url' => Yii::t('wavecms_page/main', 'Url'),
         ];
     }
 

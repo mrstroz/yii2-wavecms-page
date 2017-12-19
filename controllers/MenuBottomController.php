@@ -15,14 +15,10 @@ class MenuBottomController extends Controller
 
     public function init()
     {
-        if (isset($this->module->forms['page/menu-top'])) {
-            $this->viewForm = $this->module->forms['page/menu-top'];
-        }
-
         /** @var Menu $modelMenu */
-        $modelMenu = Yii::createObject($this->module->models['Menu']);
+        $modelMenu = Yii::createObject(Menu::class);
 
-        $this->heading = Yii::t('wavecms/page/main', 'Bottom menu');
+        $this->heading = Yii::t('wavecms_page/main', 'Bottom menu');
         $this->query = $modelMenu::find()->andWhere(['type' => 'bottom']);
 
         $this->sort = true;

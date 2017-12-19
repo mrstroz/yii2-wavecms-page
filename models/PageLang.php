@@ -2,6 +2,7 @@
 
 namespace mrstroz\wavecms\page\models;
 
+use mrstroz\wavecms\page\models\query\PageLangQuery;
 use Yii;
 
 /**
@@ -13,9 +14,6 @@ use Yii;
  * @property string $title
  * @property string $link
  * @property string $text
- * @property string $meta_title
- * @property string $meta_description
- * @property string $meta_keywords
  */
 class PageLang extends \yii\db\ActiveRecord
 {
@@ -35,7 +33,7 @@ class PageLang extends \yii\db\ActiveRecord
         return [
             [['page_id'], 'integer'],
             [['text', 'language'], 'string'],
-            [['title', 'link', 'meta_title', 'meta_description', 'meta_keywords'], 'string', 'max' => 255],
+            [['title', 'link'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,15 +43,12 @@ class PageLang extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('wavecms/page/main', 'ID'),
-            'page_id' => Yii::t('wavecms/base/main', 'Page ID'),
-            'language' => Yii::t('wavecms/base/main', 'Language'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'link' => Yii::t('wavecms/base/main', 'Link'),
-            'text' => Yii::t('wavecms/base/main', 'Text'),
-            'meta_title' => Yii::t('wavecms/base/main', 'Meta title'),
-            'meta_description' => Yii::t('wavecms/base/main', 'Meta description'),
-            'meta_keywords' => Yii::t('wavecms/base/main', 'Meta keywords'),
+            'id' => Yii::t('wavecms_page/main', 'ID'),
+            'page_id' => Yii::t('wavecms_page/main', 'Page ID'),
+            'language' => Yii::t('wavecms_page/main', 'Language'),
+            'title' => Yii::t('wavecms_page/main', 'Title'),
+            'link' => Yii::t('wavecms_page/main', 'Link'),
+            'text' => Yii::t('wavecms_page/main', 'Text'),
         ];
     }
 

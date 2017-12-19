@@ -1,7 +1,9 @@
 <?php
 
-namespace mrstroz\wavecms\page\models;
+namespace mrstroz\wavecms\page\models\query;
 
+use mrstroz\wavecms\page\models\Page;
+use mrstroz\wavecms\page\models\PageLang;
 use Yii;
 use yii\db\ActiveQuery;
 

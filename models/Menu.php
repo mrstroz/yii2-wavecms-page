@@ -6,6 +6,7 @@ use himiklab\sortablegrid\SortableGridBehavior;
 use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\SubListBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
+use mrstroz\wavecms\page\models\query\MenuQuery;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -41,7 +42,7 @@ class Menu extends ActiveRecord
             'submenu' => [
                 'class' => SubListBehavior::className(),
                 'listId' => 'submenu',
-                'route' => '/page/menu-children/sub-list',
+                'route' => '/wavecms-page/menu-children/sub-list',
                 'parentField' => 'parent_id'
             ],
             'checkbox_list' => [
@@ -76,16 +77,16 @@ class Menu extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('wavecms/base/main', 'ID'),
-            'parent_id' => Yii::t('wavecms/base/main', 'Parent ID'),
-            'type' => Yii::t('wavecms/base/main', 'Type'),
-            'publish' => Yii::t('wavecms/base/main', 'Publish'),
-            'sort' => Yii::t('wavecms/base/main', 'Sort'),
-            'languages' => Yii::t('wavecms/base/main', 'Languages'),
-            'page_id' => Yii::t('wavecms/base/main', 'Page'),
-            'page_url' => Yii::t('wavecms/base/main', 'Url'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'page_blank' => Yii::t('wavecms/base/main', 'New tab'),
+            'id' => Yii::t('wavecms_page/main', 'ID'),
+            'parent_id' => Yii::t('wavecms_page/main', 'Parent ID'),
+            'type' => Yii::t('wavecms_page/main', 'Type'),
+            'publish' => Yii::t('wavecms_page/main', 'Publish'),
+            'sort' => Yii::t('wavecms_page/main', 'Sort'),
+            'languages' => Yii::t('wavecms_page/main', 'Languages'),
+            'page_id' => Yii::t('wavecms_page/main', 'Page'),
+            'page_url' => Yii::t('wavecms_page/main', 'Url'),
+            'title' => Yii::t('wavecms_page/main', 'Title'),
+            'page_blank' => Yii::t('wavecms_page/main', 'New tab'),
         ];
     }
 

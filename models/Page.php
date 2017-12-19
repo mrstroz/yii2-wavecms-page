@@ -6,6 +6,7 @@ use himiklab\sitemap\behaviors\SitemapBehavior;
 use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\SubListBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
+use mrstroz\wavecms\page\models\query\PageQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -46,10 +47,7 @@ class Page extends ActiveRecord
             'publish',
             'type',
             'title',
-            'text',
-            'meta_title',
-            'meta_description',
-            'meta_keywords'
+            'text'
         ];
         return $scenarios;
     }
@@ -64,13 +62,13 @@ class Page extends ActiveRecord
             'home_slider' => [
                 'class' => SubListBehavior::className(),
                 'listId' => 'home_slider',
-                'route' => '/page/home-slider/sub-list',
+                'route' => '/wavecms-page/home-slider/sub-list',
                 'parentField' => 'page_id'
             ],
             'translate' => [
                 'class' => TranslateBehavior::className(),
                 'translationAttributes' => [
-                    'title', 'link', 'text', 'meta_title', 'meta_description', 'meta_keywords'
+                    'title', 'link', 'text'
                 ]
             ],
             'timestamp' => [
@@ -103,7 +101,7 @@ class Page extends ActiveRecord
             [['languages', 'title', 'link'], 'required'],
             [['publish'], 'integer'],
             [['link'], 'validateUniqueLink'],
-            [['type', 'template', 'meta_title', 'meta_description', 'meta_keywords'], 'string', 'max' => 255],
+            [['type', 'template'], 'string', 'max' => 255],
             [['text'], 'string']
         ];
     }
@@ -114,19 +112,16 @@ class Page extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('wavecms/page/main', 'ID'),
-            'publish' => Yii::t('wavecms/base/main', 'Publish'),
-            'type' => Yii::t('wavecms/base/main', 'Type'),
-            'template' => Yii::t('wavecms/page/main', 'Template'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'link' => Yii::t('wavecms/base/main', 'Link'),
-            'text' => Yii::t('wavecms/base/main', 'Text'),
-            'languages' => Yii::t('wavecms/base/main', 'Languages'),
-            'pageLangTitle' => Yii::t('wavecms/base/main', 'Title'),
-            'pageLangLink' => Yii::t('wavecms/base/main', 'Link'),
-            'meta_title' => Yii::t('wavecms/base/main', 'Meta title'),
-            'meta_description' => Yii::t('wavecms/base/main', 'Meta description'),
-            'meta_keywords' => Yii::t('wavecms/base/main', 'Meta keywords'),
+            'id' => Yii::t('wavecms_page/main', 'ID'),
+            'publish' => Yii::t('wavecms_page/main', 'Publish'),
+            'type' => Yii::t('wavecms_page/main', 'Type'),
+            'template' => Yii::t('wavecms_page/main', 'Template'),
+            'title' => Yii::t('wavecms_page/main', 'Title'),
+            'link' => Yii::t('wavecms_page/main', 'Link'),
+            'text' => Yii::t('wavecms_page/main', 'Text'),
+            'languages' => Yii::t('wavecms_page/main', 'Languages'),
+            'pageLangTitle' => Yii::t('wavecms_page/main', 'Title'),
+            'pageLangLink' => Yii::t('wavecms_page/main', 'Link')
         ];
     }
 
@@ -159,7 +154,8 @@ class Page extends ActiveRecord
 
     /**
      * Validator for unique link per language
-     * @return ActiveQuery
+     * @param $attribute
+     * @return void
      */
     public function validateUniqueLink($attribute)
     {
@@ -172,7 +168,7 @@ class Page extends ActiveRecord
         }
 
         if ($query->count() !== '0') {
-            $this->addError($attribute, Yii::t('app', Yii::t('wavecms/page/main', 'Link should be unique.')));
+            $this->addError($attribute, Yii::t('app', Yii::t('wavecms_page/main', 'Link should be unique.')));
         }
     }
 

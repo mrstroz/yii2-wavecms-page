@@ -6,6 +6,7 @@ use himiklab\sortablegrid\SortableGridBehavior;
 use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\ImageBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
+use mrstroz\wavecms\page\models\query\PageItemQuery;
 use Yii;
 use yii\db\ActiveQuery;
 
@@ -67,7 +68,7 @@ class PageItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'publish', 'sort', 'link_page_id','link_page_blank'], 'integer'],
+            [['page_id', 'publish', 'sort', 'link_page_id', 'link_page_blank'], 'integer'],
             [['type', 'image'], 'string', 'max' => 255],
             [['text'], 'string'],
             [['languages', 'title'], 'required'],
@@ -81,17 +82,17 @@ class PageItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('wavecms/base/main', 'ID'),
-            'page_id' => Yii::t('wavecms/base/main', 'Page'),
-            'publish' => Yii::t('wavecms/base/main', 'Publish'),
-            'sort' => Yii::t('wavecms/base/main', 'Sort'),
-            'type' => Yii::t('wavecms/base/main', 'Type'),
-            'title' => Yii::t('wavecms/base/main', 'Title'),
-            'languages' => Yii::t('wavecms/base/main', 'Languages'),
-            'image' => Yii::t('wavecms/base/main', 'Image'),
-            'link_page_id' => Yii::t('wavecms/base/main', 'Page'),
-            'link_page_url' => Yii::t('wavecms/base/main', 'Url'),
-            'link_page_blank' => Yii::t('wavecms/base/main', 'New tab')
+            'id' => Yii::t('wavecms_page/main', 'ID'),
+            'page_id' => Yii::t('wavecms_page/main', 'Page'),
+            'publish' => Yii::t('wavecms_page/main', 'Publish'),
+            'sort' => Yii::t('wavecms_page/main', 'Sort'),
+            'type' => Yii::t('wavecms_page/main', 'Type'),
+            'title' => Yii::t('wavecms_page/main', 'Title'),
+            'languages' => Yii::t('wavecms_page/main', 'Languages'),
+            'image' => Yii::t('wavecms_page/main', 'Image'),
+            'link_page_id' => Yii::t('wavecms_page/main', 'Page'),
+            'link_page_url' => Yii::t('wavecms_page/main', 'Url'),
+            'link_page_blank' => Yii::t('wavecms_page/main', 'New tab')
         ];
     }
 

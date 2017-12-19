@@ -8,7 +8,7 @@ use mrstroz\wavecms\components\grid\PublishColumn;
 use mrstroz\wavecms\components\web\Controller;
 use mrstroz\wavecms\page\models\Page;
 use mrstroz\wavecms\page\models\PageLang;
-use mrstroz\wavecms\page\models\PageSearch;
+use mrstroz\wavecms\page\models\search\PageSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
 
@@ -17,16 +17,12 @@ class TextController extends Controller
 
     public function init()
     {
-        if (isset($this->module->forms['page/text'])) {
-            $this->viewForm = $this->module->forms['page/text'];
-        }
-
         /** @var Page $modelPage */
-        $modelPage = Yii::createObject($this->module->models['Page']);
+        $modelPage = Yii::createObject(Page::class);
         /** @var PageLang $modelPageLang */
-        $modelPageLang = Yii::createObject($this->module->models['PageLang']);
+        $modelPageLang = Yii::createObject(PageLang::class);
 
-        $this->heading = Yii::t('wavecms/page/main', 'Text pages');
+        $this->heading = Yii::t('wavecms_page/main', 'Text pages');
         $this->query = $modelPage::find()
             ->joinLang()
             ->andWhere(['type' => 'text']);
@@ -35,17 +31,18 @@ class TextController extends Controller
         $this->dataProvider = new ActiveDataProvider([
             'query' => $this->query
         ]);
+
         $this->dataProvider->sort->attributes['title'] = [
             'asc' => [$modelPageLang::tableName() . '.title' => SORT_ASC],
             'desc' => [$modelPageLang::tableName() . '.title' => SORT_DESC],
         ];
+
         $this->dataProvider->sort->attributes['link'] = [
             'asc' => [$modelPageLang::tableName() . '.link' => SORT_ASC],
             'desc' => [$modelPageLang::tableName() . '.link' => SORT_DESC],
         ];
 
-
-        $this->filterModel = new PageSearch();
+        $this->filterModel = Yii::createObject(PageSearch::class);
 
         $this->columns = array(
             'id',

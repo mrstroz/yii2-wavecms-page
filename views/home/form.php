@@ -3,10 +3,11 @@
 use mrstroz\wavecms\components\helpers\FormHelper;
 use mrstroz\wavecms\components\helpers\WavecmsForm;
 use mrstroz\wavecms\components\widgets\CKEditorWidget;
-use mrstroz\wavecms\components\widgets\MetaTagsWidget;
 use mrstroz\wavecms\components\widgets\SubListWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
+use mrstroz\wavecms\page\components\widgets\MetaTagsWidget;
+use mrstroz\wavecms\page\models\PageSettings;
 use yii\bootstrap\Html;
 
 ?>
@@ -17,7 +18,7 @@ use yii\bootstrap\Html;
 <?php echo Html::activeHiddenInput($model, 'type', ['value' => 'home']); ?>
 <?php echo Html::activeHiddenInput($model, 'publish', ['value' => 1]); ?>
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'General')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
     <div class="col-md-12">
         <div class="row">
@@ -31,10 +32,10 @@ use yii\bootstrap\Html;
 <?php TabWidget::end(); ?>
 
 <?php
-$settingsModel = Yii::createObject(Yii::$app->controller->module->models['Settings']);
+$settingsModel = Yii::createObject(PageSettings::class);
 if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_slider') === '1') {
 
-    TabWidget::begin(['heading' => Yii::t('wavecms/page/main', 'Slider')]);
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Slider')]);
 
     echo SubListWidget::widget([
         'listId' => 'home_slider',
@@ -46,10 +47,10 @@ if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_slider') === '
 ?>
 
 
-<?php TabWidget::begin(['heading' => Yii::t('wavecms/base/main', 'Meta tags')]); ?>
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Meta tags')]); ?>
 <div class="row">
     <div class="col-md-12">
-        <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
+        <?php // echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
     </div>
 </div>
 <?php TabWidget::end(); ?>
