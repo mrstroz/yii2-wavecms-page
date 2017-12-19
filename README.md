@@ -144,7 +144,7 @@ Use `controllerMap` attribute for WaveCMS module to override controllers
 'modules' => [
     // ...   
     'wavecms' => [
-        'class' => 'mrstroz\wavecms\Module',
+        'class' => 'mrstroz\wavecms\page\Module',
         'controllerMap' => [
             'text' => 'backend\controllers\TextController'
         ]
@@ -163,7 +163,7 @@ Use **[themes](http://www.yiiframework.com/doc-2.0/guide-output-theming.html)** 
             'basePath' => '@app/themes/basic',
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
-                '@wavecms/views' => '@app/themes/basic',
+                '@wavecms_page/views' => '@app/themes/basic/wavecms-page',
             ],
         ],
     ],
@@ -175,7 +175,7 @@ Usage in frontend
 -----------------
 
 #### Pages
-1. Add new rules to your urlManager. You can do it in one of your bootstrap classes
+1. Add new rules to your urlManager. You can do it in one of your `Bootstrap` classes
 
 ```php
 <?php
@@ -204,7 +204,7 @@ public function actionPage($link)
 }
 ```
 
-3. Add new templates to `Page` model in `common\config\bootstrap.php`
+3. If you need extra templates, you can add them to `Page` model in `common\config\bootstrap.php`
 ```php
 <?php 
 use mrstroz\wavecms\page\models\Page;
