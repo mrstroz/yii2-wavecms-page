@@ -1,4 +1,4 @@
-# yii2-wavecms_page
+# yii2-wavecms-page
 **Page module for [Yii 2 WaveCMS](https://github.com/mrstroz/yii2-wavecms).** 
 
 Please do all install steps first from [Yii 2 WaveCMS](https://github.com/mrstroz/yii2-wavecms).
@@ -99,7 +99,8 @@ Add the `migrationPath` in `console/config/main.php` and run `yii migrate`:
     'migrate' => [
         'class' => 'yii\console\controllers\MigrateController',
         'migrationPath' => [
-            '@vendor/mrstroz/yii2-wavecms_page/migrations'  
+            '@vendor/mrstroz/yii2-wavecms_page/migrations',
+            '@vendor/mrstroz/yii2-wavecms-metatags/migrations'
         ],
     ],
 ],
@@ -109,6 +110,7 @@ Or run migrates directly
 
 ```yii
 yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms_page/migrations
+yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms-metatags/migrations
 ```
 
 
@@ -239,7 +241,7 @@ foreach ($menu as $one) {
 ```
 
 #### Meta tags
-See yii2-wavecms-metatags
+See [yii2-wavecms-metatags](https://github.com/mrstroz/yii2-wavecms-metatags)
 
 
 #### Add pages to sitemap

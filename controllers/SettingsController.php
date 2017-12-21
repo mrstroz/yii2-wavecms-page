@@ -5,6 +5,7 @@ namespace mrstroz\wavecms\page\controllers;
 use mrstroz\wavecms\components\web\Controller;
 use mrstroz\wavecms\page\models\PageSettings;
 use Yii;
+use yii\caching\Cache;
 
 class SettingsController extends Controller
 {
@@ -17,9 +18,7 @@ class SettingsController extends Controller
         $this->heading = Yii::t('wavecms_page/main', 'Settings');
 
         $this->on(self::EVENT_AFTER_MODEL_SAVE, function ($event) {
-            if (Yii::$app->cacheFrontend) {
-                Yii::$app->cacheFrontend->flush();
-            }
+
         });
 
         parent::init();

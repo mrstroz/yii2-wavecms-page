@@ -24,7 +24,7 @@
     "2amigos/yii2-switch-widget": "~1.0",
     "himiklab/yii2-sitemap-module": "*",
     "mrstroz/yii2-wavecms": "~0.1.0",
-    "mrstroz/yii2-wavecms-metatags": "~0.1.0"
+    "mrstroz/yii2-wavecms-metatags": "*"
   },
   "require-dev": {
     "php": ">=5.4.0",

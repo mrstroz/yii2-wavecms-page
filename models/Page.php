@@ -6,6 +6,7 @@ use himiklab\sitemap\behaviors\SitemapBehavior;
 use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\SubListBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
+use mrstroz\wavecms\metatags\components\behaviors\MetaTagsBehavior;
 use mrstroz\wavecms\page\models\query\PageQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -21,12 +22,19 @@ use yii\helpers\Url;
  * @property string $type
  * @property string $template
  * @property string $languages
+ * @property string $title
+ * @property string $link
+ * @property string $text
  */
 class Page extends ActiveRecord
 {
 
     const SCENARIO_HOME = 'home';
     const SCENARIO_TEXT = 'text';
+
+    public $meta_title;
+    public $meta_description;
+    public $meta_keywords;
 
     static public $templates = [
     ];
@@ -47,7 +55,10 @@ class Page extends ActiveRecord
             'publish',
             'type',
             'title',
-            'text'
+            'text',
+            'meta_title',
+            'meta_description',
+            'meta_keywords'
         ];
         return $scenarios;
     }
@@ -70,6 +81,9 @@ class Page extends ActiveRecord
                 'translationAttributes' => [
                     'title', 'link', 'text'
                 ]
+            ],
+            'meta_tags' => [
+                'class' => MetaTagsBehavior::className()
             ],
             'timestamp' => [
                 'class' => TimestampBehavior::className()
@@ -102,7 +116,8 @@ class Page extends ActiveRecord
             [['publish'], 'integer'],
             [['link'], 'validateUniqueLink'],
             [['type', 'template'], 'string', 'max' => 255],
-            [['text'], 'string']
+            [['text'], 'string'],
+            [['meta_title', 'meta_description', 'meta_keywords'], 'string']
         ];
     }
 
@@ -121,7 +136,10 @@ class Page extends ActiveRecord
             'text' => Yii::t('wavecms_page/main', 'Text'),
             'languages' => Yii::t('wavecms_page/main', 'Languages'),
             'pageLangTitle' => Yii::t('wavecms_page/main', 'Title'),
-            'pageLangLink' => Yii::t('wavecms_page/main', 'Link')
+            'pageLangLink' => Yii::t('wavecms_page/main', 'Link'),
+            'meta_title' => Yii::t('wavecms_page/main', 'Meta title'),
+            'meta_description' => Yii::t('wavecms_page/main', 'Meta description'),
+            'meta_keywords' => Yii::t('wavecms_page/main', 'Meta keywords'),
         ];
     }
 

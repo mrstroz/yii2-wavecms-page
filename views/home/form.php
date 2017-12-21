@@ -6,7 +6,7 @@ use mrstroz\wavecms\components\widgets\CKEditorWidget;
 use mrstroz\wavecms\components\widgets\SubListWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
-use mrstroz\wavecms\page\components\widgets\MetaTagsWidget;
+use mrstroz\wavecms\metatags\components\widgets\MetaTagsWidget;
 use mrstroz\wavecms\page\models\PageSettings;
 use yii\bootstrap\Html;
 
@@ -50,7 +50,7 @@ if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_slider') === '
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Meta tags')]); ?>
 <div class="row">
     <div class="col-md-12">
-        <?php // echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
+        <?php echo MetaTagsWidget::widget(['model' => $model, 'form' => $form]); ?>
     </div>
 </div>
 <?php TabWidget::end(); ?>
