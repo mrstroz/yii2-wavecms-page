@@ -1,7 +1,7 @@
 {
   "name": "mrstroz/yii2-wavecms-page",
   "description": "Page module for WaveCMS",
-  "type": "yii2-module",
+  "type": "yii2-extension",
   "license": "MIT",
   "minimum-stability": "dev",
   "authors": [
