@@ -99,7 +99,7 @@ Add the `migrationPath` in `console/config/main.php` and run `yii migrate`:
     'migrate' => [
         'class' => 'yii\console\controllers\MigrateController',
         'migrationPath' => [
-            '@vendor/mrstroz/yii2-wavecms_page/migrations',
+            '@vendor/mrstroz/yii2-wavecms-page/migrations',
             '@vendor/mrstroz/yii2-wavecms-metatags/migrations'
         ],
     ],
@@ -109,7 +109,7 @@ Add the `migrationPath` in `console/config/main.php` and run `yii migrate`:
 Or run migrates directly
 
 ```yii
-yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms_page/migrations
+yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms-page/migrations
 yii migrate/up --migrationPath=@vendor/mrstroz/yii2-wavecms-metatags/migrations
 ```
 
@@ -200,7 +200,7 @@ use mrstroz\wavecms\page\models\Page;
 public function actionPage($link)
 {
     $page = Page::find()->getByLink($link)->one();
-    $this->render($page->template ?: 'page', [
+    return $this->render($page->template ?: 'page', [
         'page' => $page
     ]);
 }
