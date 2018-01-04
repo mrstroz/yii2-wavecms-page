@@ -233,9 +233,21 @@ $menu = Menu::find()->getMenu('top')->all();
 use mrstroz\wavecms\page\components\helpers\Front;
 // ...
 /** @var \mrstroz\wavecms\page\models\Menu $menu */
-foreach ($menu as $one) {
-    echo '<a href="'.Front::linkUrl($one->page_id, $one->page_url).'">'.$one->title.'</a>'; // or
-    echo Front::link($one, $one->title); 
+foreach ($menu as $item) {
+    $class = (Front::isLinkActive($item) ? 'active' : '');
+    echo Front::link($item, $item->title, ['class' => $class]);
+}
+// ...
+```
+OR
+```php
+<?php 
+use mrstroz\wavecms\page\components\helpers\Front;
+// ...
+/** @var \mrstroz\wavecms\page\models\Menu $menu */
+foreach ($menu as $item) {
+    $class = (Front::isLinkActive($item) ? 'active' : '');
+    echo '<a href="'.Front::linkUrl($item->page_id, $one->page_url).'" class="'.$class.'">'.$item->title.'</a>';
 }
 // ...
 ```

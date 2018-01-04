@@ -2,6 +2,7 @@
 
 namespace mrstroz\wavecms\page\components\helpers;
 
+use mrstroz\wavecms\page\models\Menu;
 use mrstroz\wavecms\page\models\Page;
 use Yii;
 use yii\base\Component;
@@ -12,12 +13,21 @@ use yii\helpers\Url;
 
 class Front extends Component
 {
+    /** @var array Array with all text pages. Format: ['id' => 'link'] */
     public static $pages;
+
+    /** @var array Fields used for page table relationship */
     public static $fields = [
         'page_id' => 'page_id',
         'page_url' => 'page_url',
         'page_blank' => 'page_blank'
     ];
+
+    /** @var string Param in url used for page link */
+    public static $linkParam = 'link';
+
+    /** @var string Route used for text pages */
+    public static $pageRoute = 'site/page';
 
     /**
      * Get image url by filename
@@ -58,8 +68,7 @@ class Front extends Component
     public static function linkUrl($pageId, $pageUrl)
     {
         if (self::$pages === null) {
-            $modelPage = Yii::createObject(Page::class);
-            self::$pages = ArrayHelper::map($modelPage::find()->getMap()->asArray()->all(), 'id', 'link');
+            self::initPages();
         }
 
         if ($pageUrl) {
@@ -83,30 +92,70 @@ class Front extends Component
 
     /**
      * Display link by page
-     * @param Page $page
-     * @param $text
-     * @param array $options
+     * @param Menu $menu
+     * @param $text Html:a text
+     * @param array $options Html:a options
      * @param array $fields
      * @return bool|string
      * @throws \yii\base\InvalidConfigException
      */
-    public static function link($page, $text, array $options = [], array $fields = [])
+    public static function link($menu, $text, array $options = [], array $fields = [])
     {
-        if ($page instanceof ActiveRecord) {
+        if ($menu instanceof ActiveRecord) {
+
             if (!$fields) {
                 $fields = self::$fields;
             }
 
-            if ($page->{$fields['page_blank']}) {
+            if ($menu->{$fields['page_blank']}) {
                 $options['target'] = '_blank';
             }
 
             return Html::a($text, self::linkUrl(
-                $page->{$fields['page_id']},
-                $page->{$fields['page_url']}
+                $menu->{$fields['page_id']},
+                $menu->{$fields['page_url']}
             ), $options);
         }
 
         return false;
+    }
+
+    /**
+     * Check if page is active
+     * @param Menu $menu
+     * @param array $fields
+     * @return bool
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function isLinkActive($menu, array $fields = [])
+    {
+        if ($menu instanceof ActiveRecord) {
+            if (self::$pages === null) {
+                self::initPages();
+            }
+
+            if (!$fields) {
+                $fields = self::$fields;
+            }
+
+            if (isset(self::$pages[$menu->{$fields['page_id']}])) {
+                if (Yii::$app->requestedRoute === self::$pageRoute && Yii::$app->request->getQueryParam(self::$linkParam) === self::$pages[$menu->{$fields['page_id']}]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Init pages array
+     * @throws \yii\base\InvalidConfigException
+     */
+    private static function initPages()
+    {
+        $modelPage = Yii::createObject(Page::class);
+        self::$pages = ArrayHelper::map($modelPage::find()->getMap()->asArray()->all(), 'id', 'link');
     }
 }
