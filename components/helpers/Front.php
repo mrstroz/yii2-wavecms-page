@@ -7,13 +7,12 @@ use mrstroz\wavecms\page\models\Page;
 use Yii;
 use yii\base\Component;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 class Front extends Component
 {
-    /** @var array Array with all text pages. Format: ['id' => 'link'] */
+    /** @var array Array with all text pages. Format: ['id' => ['id' => 1,'type' => 'text','link'=>'about-us']] */
     public static $pages;
 
     /** @var array Fields used for page table relationship */
@@ -79,10 +78,9 @@ class Front extends Component
             return Url::to([$pageUrl]);
         }
 
-        if (isset(self::$pages[$pageId])) {
-
-            if (self::$pages[$pageId]) {
-                return Url::to(['/' . self::$pages[$pageId]]);
+        if (isset(self::$pages[$pageId]['link'])) {
+            if (self::$pages[$pageId]['link']) {
+                return Url::to(['/' . self::$pages[$pageId]['link']]);
             }
         }
 
@@ -138,11 +136,25 @@ class Front extends Component
                 $fields = self::$fields;
             }
 
-            if (isset(self::$pages[$menu->{$fields['page_id']}])) {
-                if (Yii::$app->requestedRoute === self::$pageRoute && Yii::$app->request->getQueryParam(self::$linkParam) === self::$pages[$menu->{$fields['page_id']}]) {
+            /** Check if page_url is the same as current url */
+            $pageUrl = $menu->{$fields['page_url']};
+            if ($pageUrl) {
+                if (strpos($pageUrl, 'http') === 0) {
+                    return false;
+                }
+
+                return (Url::to([$pageUrl]) === Url::current());
+            }
+
+            if (isset(self::$pages[$menu->{$fields['page_id']}]['link'])) {
+                if (Yii::$app->requestedRoute === self::$pageRoute && Yii::$app->request->getQueryParam(self::$linkParam) === self::$pages[$menu->{$fields['page_id']}]['link']) {
                     return true;
                 }
+
+                return false;
             }
+
+            return (Url::home() === Url::current());
         }
 
         return false;
@@ -156,6 +168,13 @@ class Front extends Component
     private static function initPages()
     {
         $modelPage = Yii::createObject(Page::class);
-        self::$pages = ArrayHelper::map($modelPage::find()->getMap()->asArray()->all(), 'id', 'link');
+        $pages = $modelPage::find()->getMap()->asArray()->all();
+
+        if ($pages) {
+            foreach ($pages as $page) {
+                self::$pages[$page['id']] = $page;
+            }
+        }
+
     }
 }

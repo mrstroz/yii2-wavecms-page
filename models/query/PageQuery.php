@@ -44,7 +44,7 @@ class PageQuery extends ActiveQuery
     public function getMap()
     {
         return $this
-            ->select([Page::tableName() . '.id', PageLang::tableName() . '.link'])
+            ->select([Page::tableName() . '.id', PageLang::tableName() . '.link', Page::tableName() . '.type'])
             ->joinLang();
     }
 
