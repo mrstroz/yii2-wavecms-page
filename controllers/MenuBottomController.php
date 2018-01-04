@@ -3,6 +3,7 @@
 namespace mrstroz\wavecms\page\controllers;
 
 use mrstroz\wavecms\components\grid\ActionColumn;
+use mrstroz\wavecms\components\grid\CheckboxColumn;
 use mrstroz\wavecms\components\grid\LanguagesColumn;
 use mrstroz\wavecms\components\grid\PublishColumn;
 use mrstroz\wavecms\components\grid\SortColumn;
@@ -24,6 +25,9 @@ class MenuBottomController extends Controller
         $this->sort = true;
 
         $this->columns = array(
+            [
+                'class' => CheckboxColumn::className()
+            ],
             [
                 'attribute' => 'title',
             ],

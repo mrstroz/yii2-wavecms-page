@@ -3,6 +3,7 @@
 namespace mrstroz\wavecms\page\controllers;
 
 use mrstroz\wavecms\components\grid\ActionColumn;
+use mrstroz\wavecms\components\grid\CheckboxColumn;
 use mrstroz\wavecms\components\grid\LanguagesColumn;
 use mrstroz\wavecms\components\grid\PublishColumn;
 use mrstroz\wavecms\components\web\Controller;
@@ -45,6 +46,9 @@ class TextController extends Controller
         $this->filterModel = Yii::createObject(PageSearch::class);
 
         $this->columns = array(
+            [
+                'class' => CheckboxColumn::className()
+            ],
             'id',
             [
                 'attribute' => 'title',
