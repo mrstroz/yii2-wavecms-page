@@ -40,21 +40,7 @@ Required
         */
     ],
 ],
-'controllerMap' => [
-    'elfinder' => [
-        'class' => 'mihaildev\elfinder\Controller',
-        'access' => ['@'],
-        'disabledCommands' => ['netmount'],
-        'roots' => [
-            [
-                'baseUrl'=>'@frontWeb',
-                'basePath'=>'@frontWebroot',
-                'path' => 'userfiles',
-                'name' => 'Files'
-            ]
-        ]
-    ]
-]
+
 ```
 
 Form views can be overwritten by backend [themes](http://www.yiiframework.com/doc-2.0/guide-output-theming.html);

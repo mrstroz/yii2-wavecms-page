@@ -186,7 +186,7 @@ class Bootstrap implements BootstrapInterface
      * Get container route for class name
      * @param array $routes
      * @param $name
-     * @throws Exception
+     * @throws \yii\base\Exception
      * @return int|string
      */
     private function getContainerRoute(array $routes, $name)
