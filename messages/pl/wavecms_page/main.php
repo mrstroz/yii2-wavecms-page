@@ -17,6 +17,15 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Bottom javascript' => 'Dolny javascript',
+    'Default meta description' => 'Domyślny opis',
+    'Default meta keywords' => 'Domyślne słowa kluczowe',
+    'Default meta title' => 'Domyślny tytuł',
+    'Favicon' => 'Favicon',
+    'Javascript' => 'Javascript',
+    'Meta' => 'Meta',
+    'Top javascript' => 'Górny javascript',
+    'Without &lt;script&gt; tag' => 'Bez tagu &lt;script&gt;',
     'Attribute {attribute} is not defined' => 'Atrybut {attribute} nie jest zdefiniowany',
     'Bottom menu' => 'Dolne menu',
     'Bottom submenu' => 'Dolne podmenu',

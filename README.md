@@ -48,6 +48,10 @@ Form views can be overwritten by backend [themes](http://www.yiiframework.com/do
 2. Update `frontend/config/main.php` (Yii2 advanced template) 
 
 ```php
+'bootstrap' => [
+    // ...
+    'mrstroz\wavecms\page\FrontendBootstrap'
+],
 'modules' => [
     'sitemap' => [
         'class' => 'himiklab\sitemap\Sitemap',
