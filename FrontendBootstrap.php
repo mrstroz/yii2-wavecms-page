@@ -17,6 +17,11 @@ class FrontendBootstrap implements BootstrapInterface
 {
     public function bootstrap($app)
     {
+
+        $app->set('settings', [
+            'class' => 'yii2mod\settings\components\Settings',
+        ]);
+
         $app->view->on(View::EVENT_BEGIN_PAGE, function ($event) {
 
             $favicon = \Yii::$app->settings->get('PageSettings','favicon');

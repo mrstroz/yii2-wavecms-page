@@ -76,9 +76,6 @@ Form views can be overwritten by backend [themes](http://www.yiiframework.com/do
             ['pattern' => 'sitemap', 'route' => 'sitemap/default/index', 'suffix' => '.xml'],
         ],
     ],
-    'settings' => [
-        'class' => 'yii2mod\settings\components\Settings',
-    ],
 ]
 ```
 
