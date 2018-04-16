@@ -21,6 +21,10 @@ use yii\db\ActiveRecord;
  * @property string $languages
  * @property string $page_id
  * @property string $page_blank
+
+ * @property string $title
+ * @property string $page_url
+ *
  */
 class Menu extends ActiveRecord
 {

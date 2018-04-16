@@ -177,9 +177,13 @@ use Yii;
 //Parse request to set language before run ActiveRecord::find()
 Yii::$app->urlManager->parseRequest(Yii::$app->request);
 $modelPage = Yii::createObject(Page::class);
-Yii::$app->getUrlManager()->addRules([
-    '<link:(' . implode('|', $modelPage::find()->select(['link'])->byAllCriteria()->byType(['text'])->column()) . ')>' => 'site/page'
-]);
+$pages = $modelPage::find()->select(['link'])->byAllCriteria()->byType(['text'])->column();
+
+if ($pages) {
+    Yii::$app->getUrlManager()->addRules([
+        '<link:(' . implode('|', $pages) . ')>' => 'site/page'
+    ]);
+}
 ```
 
 2. Get requested page by link in `page` action
