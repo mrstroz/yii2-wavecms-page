@@ -30,19 +30,26 @@ use yii\bootstrap\Html;
                 <?php // echo $form->field($model, 'default_meta_keywords')->textarea(['rows' => 5]); ?>
                 <?php PanelWidget::end(); ?>
             </div>
-            <div class="col-md-8">
-                <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Javascript')]); ?>
-                <?php echo $form->field($model, 'top_javascript')->textarea(['rows' => 15])
-                    ->hint(Yii::t('wavecms_page/main', 'Without &lt;script&gt; tag')); ?>
-                <?php echo $form->field($model, 'btm_javascript')->textarea(['rows' => 15])
-                    ->hint(Yii::t('wavecms_page/main', 'Without &lt;script&gt; tag')); ?>
-                <?php PanelWidget::end(); ?>
-            </div>
+
         </div>
     </div>
 </div>
 <?php TabWidget::end(); ?>
 
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Javascript')]); ?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?php echo $form->field($model, 'top_javascript')->textarea(['rows' => 25])
+            ->hint(Yii::t('wavecms_page/main', 'Without &lt;script&gt; tag')); ?>
+    </div>
+    <div class="col-md-6">
+        <?php echo $form->field($model, 'btm_javascript')->textarea(['rows' => 25])
+            ->hint(Yii::t('wavecms_page/main', 'Without &lt;script&gt; tag')); ?>
+    </div>
+</div>
+
+<?php TabWidget::end(); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Settings')]); ?>
 <div class="row">
