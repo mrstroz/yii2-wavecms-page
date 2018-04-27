@@ -177,7 +177,7 @@ class Bootstrap implements BootstrapInterface
                     'label' => FontAwesome::icon('home') . Yii::t('wavecms_page/main', 'Home page'),
                     'url' => ['/wavecms-page/home/page']
                 ],
-                ['label' => FontAwesome::icon('file-text-o') . Yii::t('wavecms_page/main', 'Text pages'),
+                ['label' => FontAwesome::icon('file-alt') . Yii::t('wavecms_page/main', 'Text pages'),
                     'url' => ['/wavecms-page/text/index']
                 ],
                 ['label' => FontAwesome::icon('cog') . Yii::t('wavecms_page/main', 'Settings'),
