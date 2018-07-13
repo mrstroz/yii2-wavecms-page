@@ -25,6 +25,8 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $page_url
  *
+ * @property MenuLang[] $translations
+ * @property Menu[] $submenu
  */
 class Menu extends ActiveRecord
 {
@@ -103,9 +105,19 @@ class Menu extends ActiveRecord
         return new MenuQuery(get_called_class());
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTranslations()
     {
-        return $this->hasMany(MenuLang::className(), ['menu_id' => 'id']);
+        return $this->hasMany(MenuLang::class, ['menu_id' => 'id']);
+    }
+
+    /**
+     * @return MenuQuery|\yii\db\ActiveQuery
+     */
+    public function getSubmenu() {
+        return $this->hasMany(Menu::class,['parent_id' => 'id']);
     }
 
 }

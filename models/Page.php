@@ -7,6 +7,8 @@ use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\SubListBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
 use mrstroz\wavecms\metatags\components\behaviors\MetaTagsBehavior;
+use mrstroz\wavecms\page\models\query\PageItemQuery;
+use mrstroz\wavecms\page\models\query\PageLangQuery;
 use mrstroz\wavecms\page\models\query\PageQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -25,6 +27,9 @@ use yii\helpers\Url;
  * @property string $title
  * @property string $link
  * @property string $text
+ *
+ * @property PageLang[] $translations
+ * @property PageItem[] $items
  */
 class Page extends ActiveRecord
 {
@@ -154,20 +159,20 @@ class Page extends ActiveRecord
 
     /**
      * Required for Translate behaviour
-     * @return ActiveQuery
+     * @return ActiveQuery|PageLangQuery
      */
     public function getTranslations()
     {
-        return $this->hasMany(PageLang::className(), ['page_id' => 'id']);
+        return $this->hasMany(PageLang::class, ['page_id' => 'id']);
     }
 
     /**
      * PageItem relation
-     * @return ActiveQuery
+     * @return ActiveQuery|PageItemQuery
      */
     public function getItems()
     {
-        return $this->hasMany(PageItem::className(), ['page_id' => 'id']);
+        return $this->hasMany(PageItem::class, ['page_id' => 'id']);
     }
 
     /**

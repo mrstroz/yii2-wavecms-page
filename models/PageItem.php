@@ -6,7 +6,9 @@ use himiklab\sortablegrid\SortableGridBehavior;
 use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\ImageBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
+use mrstroz\wavecms\page\models\query\PageItemLangQuery;
 use mrstroz\wavecms\page\models\query\PageItemQuery;
+use mrstroz\wavecms\page\models\query\PageQuery;
 use Yii;
 use yii\db\ActiveQuery;
 
@@ -22,6 +24,9 @@ use yii\db\ActiveQuery;
  * @property string $image
  * @property string $link_page_id
  * @property string $link_page_blank
+ *
+ * @property PageItemLang[] $translations
+ * @property Page $page
  */
 class PageItem extends \yii\db\ActiveRecord
 {
@@ -107,20 +112,20 @@ class PageItem extends \yii\db\ActiveRecord
 
     /**
      * Required for Translate behaviour
-     * @return ActiveQuery
+     * @return ActiveQuery|PageItemLangQuery
      */
     public function getTranslations()
     {
-        return $this->hasMany(PageItemLang::className(), ['page_item_id' => 'id']);
+        return $this->hasMany(PageItemLang::class, ['page_item_id' => 'id']);
     }
 
     /**
      * Page relation
-     * @return ActiveQuery
+     * @return ActiveQuery|PageQuery
      */
     public function getPage()
     {
-        return $this->hasOne(Page::className(), ['id' => 'page_id']);
+        return $this->hasOne(Page::class, ['id' => 'page_id']);
     }
 
 

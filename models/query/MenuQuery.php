@@ -2,6 +2,7 @@
 
 namespace mrstroz\wavecms\page\models\query;
 
+use mrstroz\wavecms\page\models\Menu;
 use Yii;
 use yii\db\ActiveQuery;
 
@@ -35,15 +36,29 @@ class MenuQuery extends ActiveQuery
         return parent::one($db);
     }
 
+    /**
+     * @param $type
+     * @return MenuQuery
+     */
     public function getMenu($type)
+    {
+        return $this
+            ->byCriteria()
+            ->andWhere(['=', 'type', $type])
+            ->orderBy('sort');
+    }
+
+    /**
+     * @return MenuQuery
+     */
+    public function byCriteria()
     {
         return $this
             ->joinWith('translations')
             ->andFilterWhere(['and',
                 ['=', 'publish', '1'],
-                ['=', 'type', $type],
                 ['REGEXP', 'languages', '(^|;)(' . Yii::$app->language . ')(;|$)']
-            ])
-            ->orderBy('sort');
+            ]);
     }
+
 }
