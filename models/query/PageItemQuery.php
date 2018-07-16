@@ -45,6 +45,24 @@ class PageItemQuery extends ActiveQuery
     }
 
     /**
+     * @param $pageId
+     * @return PageItemQuery
+     */
+    public function byPageId($pageId)
+    {
+        return $this->andWhere(['page_id' => $pageId]);
+    }
+
+    /**
+     * @param $type
+     * @return PageItemQuery
+     */
+    public function byType($type)
+    {
+        return $this->andWhere(['type' => $type]);
+    }
+
+    /**
      * @return PageItemQuery
      */
     public function byCriteria()

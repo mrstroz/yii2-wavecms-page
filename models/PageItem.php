@@ -15,6 +15,7 @@ use yii\db\ActiveQuery;
 /**
  * This is the model class for table "page_item".
  *
+ * Attributes form PageItem
  * @property string $id
  * @property string $page_id
  * @property integer $publish
@@ -25,6 +26,12 @@ use yii\db\ActiveQuery;
  * @property string $link_page_id
  * @property string $link_page_blank
  *
+ * Attributes form PageItemLang
+ * @property string $title
+ * @property string $text
+ * @property string $link_page_url
+ *
+ * Relations
  * @property PageItemLang[] $translations
  * @property Page $page
  */
@@ -74,10 +81,11 @@ class PageItem extends \yii\db\ActiveRecord
     {
         return [
             [['page_id', 'publish', 'sort', 'link_page_id', 'link_page_blank'], 'integer'],
-            [['type', 'image'], 'string', 'max' => 255],
-            [['text'], 'string'],
+            [['type'], 'string', 'max' => 255],
+            [['image'], 'image'],
             [['languages', 'title'], 'required'],
             [['title', 'link_page_url'], 'string', 'max' => 255],
+            [['text'], 'string'],
         ];
     }
 
@@ -93,6 +101,7 @@ class PageItem extends \yii\db\ActiveRecord
             'sort' => Yii::t('wavecms_page/main', 'Sort'),
             'type' => Yii::t('wavecms_page/main', 'Type'),
             'title' => Yii::t('wavecms_page/main', 'Title'),
+            'text' => Yii::t('wavecms_page/main', 'Text'),
             'languages' => Yii::t('wavecms_page/main', 'Languages'),
             'image' => Yii::t('wavecms_page/main', 'Image'),
             'link_page_id' => Yii::t('wavecms_page/main', 'Page'),
