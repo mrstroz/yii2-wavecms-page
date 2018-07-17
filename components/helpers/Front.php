@@ -162,6 +162,17 @@ class Front extends Component
     }
 
     /**
+     * Return movie ID based on YouTube url
+     * @param $url
+     * @return mixed
+     */
+    public static function youTubeId($url)
+    {
+        parse_str(parse_url($url, PHP_URL_QUERY), $vars);
+        return $vars['v'];
+    }
+
+    /**
      * Init pages array
      * @throws \yii\base\InvalidConfigException
      */
