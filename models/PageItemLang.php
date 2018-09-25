@@ -13,6 +13,7 @@ use Yii;
  * @property string $language
  * @property string $title
  * @property string $text
+ * @property string $link_title
  * @property string $link_page_url
  */
 class PageItemLang extends \yii\db\ActiveRecord
@@ -34,7 +35,7 @@ class PageItemLang extends \yii\db\ActiveRecord
             [['page_item_id'], 'integer'],
             [['language'], 'string', 'max' => 10],
             [['text'], 'string'],
-            [['title', 'link_page_url'], 'string', 'max' => 255],
+            [['title', 'link_title', 'link_page_url'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,6 +50,7 @@ class PageItemLang extends \yii\db\ActiveRecord
             'language' => Yii::t('wavecms_page/main', 'Language'),
             'title' => Yii::t('wavecms_page/main', 'Title'),
             'text' => Yii::t('wavecms_page/main', 'Text'),
+            'link_title' => Yii::t('wavecms_page/main', 'Link title'),
             'link_page_url' => Yii::t('wavecms_page/main', 'Url'),
         ];
     }

@@ -21,22 +21,29 @@ use yii\db\ActiveQuery;
  * @property integer $publish
  * @property string $sort
  * @property string $type
+ * @property string $template
  * @property string $languages
  * @property string $image
+ * @property string $image_mobile
  * @property string $link_page_id
  * @property string $link_page_blank
  *
  * Attributes form PageItemLang
  * @property string $title
  * @property string $text
+ * @property string $link_title
  * @property string $link_page_url
  *
  * Relations
  * @property PageItemLang[] $translations
  * @property Page $page
+ *
  */
 class PageItem extends \yii\db\ActiveRecord
 {
+
+    static public $templates = [
+    ];
 
     /**
      * @inheritdoc
@@ -64,10 +71,14 @@ class PageItem extends \yii\db\ActiveRecord
                 'class' => ImageBehavior::className(),
                 'attribute' => 'image',
             ],
+            'image_mobile' => [
+                'class' => ImageBehavior::className(),
+                'attribute' => 'image_mobile',
+            ],
             'translate' => [
                 'class' => TranslateBehavior::className(),
                 'translationAttributes' => [
-                    'title', 'text', 'link_page_url'
+                    'title', 'text', 'link_title', 'link_page_url'
                 ]
             ],
         ];
@@ -81,10 +92,10 @@ class PageItem extends \yii\db\ActiveRecord
     {
         return [
             [['page_id', 'publish', 'sort', 'link_page_id', 'link_page_blank'], 'integer'],
-            [['type'], 'string', 'max' => 255],
-            [['image'], 'image'],
+            [['type', 'template'], 'string', 'max' => 255],
+            [['image', 'image_mobile'], 'image'],
             [['languages', 'title'], 'required'],
-            [['title', 'link_page_url'], 'string', 'max' => 255],
+            [['title', 'link_title', 'link_page_url'], 'string', 'max' => 255],
             [['text'], 'string'],
         ];
     }
@@ -100,10 +111,13 @@ class PageItem extends \yii\db\ActiveRecord
             'publish' => Yii::t('wavecms_page/main', 'Publish'),
             'sort' => Yii::t('wavecms_page/main', 'Sort'),
             'type' => Yii::t('wavecms_page/main', 'Type'),
+            'template' => Yii::t('wavecms_page/main', 'Template'),
             'title' => Yii::t('wavecms_page/main', 'Title'),
             'text' => Yii::t('wavecms_page/main', 'Text'),
             'languages' => Yii::t('wavecms_page/main', 'Languages'),
             'image' => Yii::t('wavecms_page/main', 'Image'),
+            'image_mobile' => Yii::t('wavecms_page/main', 'Image mobile'),
+            'link_title' => Yii::t('wavecms_page/main', 'Link title'),
             'link_page_id' => Yii::t('wavecms_page/main', 'Page'),
             'link_page_url' => Yii::t('wavecms_page/main', 'Url'),
             'link_page_blank' => Yii::t('wavecms_page/main', 'New tab')

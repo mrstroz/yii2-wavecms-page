@@ -10,13 +10,15 @@ use mrstroz\wavecms\components\widgets\TabWidget;
 use mrstroz\wavecms\page\components\widgets\PageLinkWidget;
 use yii\bootstrap\Html;
 
+/** @var \mrstroz\wavecms\page\models\PageItem $model */
+
 ?>
 
 <?php $form = WavecmsForm::begin(); ?>
 
 <?php TabsWidget::begin(); ?>
 
-<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'grid']); ?>
+<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'section']); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
@@ -25,7 +27,15 @@ use yii\bootstrap\Html;
 
         <div class="row">
             <div class="col-md-8 col-lg-9">
-                <?= $form->field($model, 'title'); ?>
+                <div class="row">
+                    <div class="col-md-9">
+                        <?= $form->field($model, 'title'); ?>
+                    </div>
+                    <div class="col-md-3">
+                        <?= $form->field($model, 'template')->dropDownList($model::$templates) ?>
+                    </div>
+                </div>
+
                 <?= $form->field($model, 'text')->widget(CKEditorWidget::className()) ?>
             </div>
 

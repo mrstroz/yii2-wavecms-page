@@ -46,6 +46,33 @@ if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_slider') === '
 }
 ?>
 
+<?php
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_grid') === '1') {
+
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Grid')]);
+
+    echo SubListWidget::widget([
+        'listId' => 'grid',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
+
+<?php
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_sections') === '1') {
+
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Sections')]);
+
+    echo SubListWidget::widget([
+        'listId' => 'section',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Meta tags')]); ?>
 <div class="row">

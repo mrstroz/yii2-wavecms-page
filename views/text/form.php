@@ -4,9 +4,11 @@ use mrstroz\wavecms\components\helpers\FormHelper;
 use mrstroz\wavecms\components\helpers\WavecmsForm;
 use mrstroz\wavecms\components\widgets\CKEditorWidget;
 use mrstroz\wavecms\components\widgets\LanguagesWidget;
+use mrstroz\wavecms\components\widgets\SubListWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
 use mrstroz\wavecms\components\widgets\TabWidget;
 use mrstroz\wavecms\metatags\components\widgets\MetaTagsWidget;
+use mrstroz\wavecms\page\models\PageSettings;
 use powerkernel\slugify\Slugify;
 use yii\bootstrap\Html;
 
@@ -58,6 +60,36 @@ use yii\bootstrap\Html;
     </div>
 </div>
 <?php TabWidget::end(); ?>
+
+<?php
+$settingsModel = Yii::createObject(PageSettings::class);
+
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_page_grid') === '1') {
+
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Grid')]);
+
+    echo SubListWidget::widget([
+        'listId' => 'grid',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
+
+<?php
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_page_sections') === '1') {
+
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Sections')]);
+
+    echo SubListWidget::widget([
+        'listId' => 'section',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Meta tags')]); ?>
 <div class="row">

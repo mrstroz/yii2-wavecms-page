@@ -57,37 +57,71 @@ use yii\bootstrap\Html;
     <div class="col-md-12">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Menu')]); ?>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php echo $form->field($model, 'is_top_submenu')
-                            ->widget(SwitchBox::className(), [
-                                'options' => [
-                                    'label' => false
-                                ],
-                                'clientOptions' => [
-                                    'onColor' => 'success',
-                                ]
-                            ]); ?>
-                    </div>
-                    <div class="col-md-6">
-                        <?php echo $form->field($model, 'is_bottom_submenu')
-                            ->widget(SwitchBox::className(), [
-                                'options' => [
-                                    'label' => false
-                                ],
-                                'clientOptions' => [
-                                    'onColor' => 'success',
-                                ]
-                            ]); ?>
-                    </div>
-                </div>
+                <?php echo $form->field($model, 'is_top_submenu')
+                    ->widget(SwitchBox::className(), [
+                        'options' => [
+                            'label' => false
+                        ],
+                        'clientOptions' => [
+                            'onColor' => 'success',
+                        ]
+                    ]); ?>
+                <?php echo $form->field($model, 'is_bottom_submenu')
+                    ->widget(SwitchBox::className(), [
+                        'options' => [
+                            'label' => false
+                        ],
+                        'clientOptions' => [
+                            'onColor' => 'success',
+                        ]
+                    ]); ?>
                 <?php PanelWidget::end(); ?>
             </div>
-            <div class="col-md-6">
-                <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Pages')]); ?>
+            <div class="col-md-3">
+                <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Home page')]); ?>
                 <?php echo $form->field($model, 'is_home_slider')->widget(SwitchBox::className(), [
+                    'options' => [
+                        'label' => false
+                    ],
+                    'clientOptions' => [
+                        'onColor' => 'success',
+                    ]
+                ]); ?>
+
+                <?php echo $form->field($model, 'is_home_grid')->widget(SwitchBox::className(), [
+                    'options' => [
+                        'label' => false
+                    ],
+                    'clientOptions' => [
+                        'onColor' => 'success',
+                    ]
+                ]); ?>
+
+                <?php echo $form->field($model, 'is_home_sections')->widget(SwitchBox::className(), [
+                    'options' => [
+                        'label' => false
+                    ],
+                    'clientOptions' => [
+                        'onColor' => 'success',
+                    ]
+                ]); ?>
+                <?php PanelWidget::end(); ?>
+            </div>
+            <div class="col-md-3">
+                <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Text pages')]); ?>
+
+                <?php echo $form->field($model, 'is_page_grid')->widget(SwitchBox::className(), [
+                    'options' => [
+                        'label' => false
+                    ],
+                    'clientOptions' => [
+                        'onColor' => 'success',
+                    ]
+                ]); ?>
+
+                <?php echo $form->field($model, 'is_page_sections')->widget(SwitchBox::className(), [
                     'options' => [
                         'label' => false
                     ],

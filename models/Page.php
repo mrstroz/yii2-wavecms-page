@@ -30,6 +30,8 @@ use yii\helpers\Url;
  *
  * @property PageLang[] $translations
  * @property PageItem[] $items
+ * @property PageItem[] $grid
+ * @property PageItem[] $sections
  */
 class Page extends ActiveRecord
 {
@@ -79,6 +81,18 @@ class Page extends ActiveRecord
                 'class' => SubListBehavior::className(),
                 'listId' => 'home_slider',
                 'route' => '/wavecms-page/home-slider/sub-list',
+                'parentField' => 'page_id'
+            ],
+            'grid' => [
+                'class' => SubListBehavior::class,
+                'listId' => 'grid',
+                'route' => '/wavecms-page/grid/sub-list',
+                'parentField' => 'page_id'
+            ],
+            'section' => [
+                'class' => SubListBehavior::class,
+                'listId' => 'section',
+                'route' => '/wavecms-page/section/sub-list',
                 'parentField' => 'page_id'
             ],
             'translate' => [
@@ -173,6 +187,26 @@ class Page extends ActiveRecord
     public function getItems()
     {
         return $this->hasMany(PageItem::class, ['page_id' => 'id']);
+    }
+
+    /**
+     * Grid relation to PageItem
+     * @return ActiveQuery|PageItemQuery
+     */
+    public function getGrid()
+    {
+        return $this->hasMany(PageItem::class, ['page_id' => 'id'])->getItems()->andWhere(['type' => 'grid']);
+
+    }
+
+    /**
+     * Sections relation to PageItem
+     * @return ActiveQuery|PageItemQuery
+     */
+    public function getSections()
+    {
+        return $this->hasMany(PageItem::class, ['page_id' => 'id'])->getItems()->andWhere(['type' => 'section']);
+
     }
 
     /**
