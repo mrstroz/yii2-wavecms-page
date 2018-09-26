@@ -17,7 +17,7 @@ composer require --prefer-source "mrstroz/yii2-wavecms-page" "~0.3.1"
 or add
 
 ```
-"mrstroz/yii2-wavecms-page": "~0.2.0"
+"mrstroz/yii2-wavecms-page": "~0.3.1"
 ```
 
 to the require section of your `composer.json` file.

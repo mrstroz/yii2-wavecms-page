@@ -16,7 +16,7 @@ use yii\bootstrap\Html;
 
 <?php TabsWidget::begin(); ?>
 
-<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'grid']); ?>
+<?php echo Html::activeHiddenInput($model, 'type', ['value' => 'slider']); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'General')]); ?>
 <div class="row">
