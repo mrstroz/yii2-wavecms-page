@@ -3,6 +3,7 @@
 use dosamigos\switchinput\SwitchBox;
 use mrstroz\wavecms\components\helpers\FormHelper;
 use mrstroz\wavecms\components\helpers\WavecmsForm;
+use mrstroz\wavecms\components\widgets\CKEditorWidget;
 use mrstroz\wavecms\components\widgets\ImageWidget;
 use mrstroz\wavecms\components\widgets\PanelWidget;
 use mrstroz\wavecms\components\widgets\TabsWidget;
@@ -34,6 +35,16 @@ use yii\bootstrap\Html;
         </div>
     </div>
 </div>
+<?php TabWidget::end(); ?>
+
+<?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Footer')]); ?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?php echo $form->field($model, 'footer_copyright')->widget(CKEditorWidget::class, ['height' => 200]); ?>
+    </div>
+</div>
+
 <?php TabWidget::end(); ?>
 
 <?php TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Javascript')]); ?>

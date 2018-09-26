@@ -30,6 +30,7 @@ use yii\helpers\Url;
  *
  * @property PageLang[] $translations
  * @property PageItem[] $items
+ * @property PageItem[] $slider
  * @property PageItem[] $grid
  * @property PageItem[] $sections
  */
@@ -190,12 +191,22 @@ class Page extends ActiveRecord
     }
 
     /**
+     * Slider relation to PageItem
+     * @return ActiveQuery|PageItemQuery
+     */
+    public function getSlider()
+    {
+        return $this->getItems()->getItems()->andWhere(['type' => 'slider']);
+
+    }
+
+    /**
      * Grid relation to PageItem
      * @return ActiveQuery|PageItemQuery
      */
     public function getGrid()
     {
-        return $this->hasMany(PageItem::class, ['page_id' => 'id'])->getItems()->andWhere(['type' => 'grid']);
+        return $this->getItems()->getItems()->andWhere(['type' => 'grid']);
 
     }
 
@@ -205,7 +216,7 @@ class Page extends ActiveRecord
      */
     public function getSections()
     {
-        return $this->hasMany(PageItem::class, ['page_id' => 'id'])->getItems()->andWhere(['type' => 'section']);
+        return $this->getItems()->getItems()->andWhere(['type' => 'section']);
 
     }
 
