@@ -123,6 +123,15 @@ use yii\bootstrap\Html;
             <div class="col-md-3">
                 <?php PanelWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Text pages')]); ?>
 
+                <?php echo $form->field($model, 'is_page_slider')->widget(SwitchBox::className(), [
+                    'options' => [
+                        'label' => false
+                    ],
+                    'clientOptions' => [
+                        'onColor' => 'success',
+                    ]
+                ]); ?>
+
                 <?php echo $form->field($model, 'is_page_grid')->widget(SwitchBox::className(), [
                     'options' => [
                         'label' => false

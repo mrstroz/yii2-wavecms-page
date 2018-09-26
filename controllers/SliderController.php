@@ -10,7 +10,7 @@ use mrstroz\wavecms\components\web\Controller;
 use mrstroz\wavecms\page\models\PageItem;
 use Yii;
 
-class HomeSliderController extends Controller
+class SliderController extends Controller
 {
 
     public function init()
@@ -19,7 +19,7 @@ class HomeSliderController extends Controller
         $modelMenu = Yii::createObject(PageItem::class);
 
         $this->heading = Yii::t('wavecms_page/main', 'Slider');
-        $this->query = $modelMenu::find()->andWhere(['type' => 'home-slider']);
+        $this->query = $modelMenu::find()->andWhere(['type' => 'slider']);
 
         $this->sort = true;
 

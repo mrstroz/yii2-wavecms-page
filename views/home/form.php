@@ -38,7 +38,7 @@ if (Yii::$app->settings->get($settingsModel->formName(), 'is_home_slider') === '
     TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Slider')]);
 
     echo SubListWidget::widget([
-        'listId' => 'home_slider',
+        'listId' => 'slider',
         'model' => $model
     ]);
 

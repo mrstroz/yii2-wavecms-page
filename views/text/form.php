@@ -61,9 +61,23 @@ use yii\bootstrap\Html;
 </div>
 <?php TabWidget::end(); ?>
 
+
 <?php
 $settingsModel = Yii::createObject(PageSettings::class);
+if (Yii::$app->settings->get($settingsModel->formName(), 'is_page_slider') === '1') {
 
+    TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Slider')]);
+
+    echo SubListWidget::widget([
+        'listId' => 'slider',
+        'model' => $model
+    ]);
+
+    TabWidget::end();
+}
+?>
+
+<?php
 if (Yii::$app->settings->get($settingsModel->formName(), 'is_page_grid') === '1') {
 
     TabWidget::begin(['heading' => Yii::t('wavecms_page/main', 'Grid')]);

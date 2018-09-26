@@ -78,10 +78,10 @@ class Page extends ActiveRecord
                 'class' => CheckboxListBehavior::className(),
                 'fields' => ['languages']
             ],
-            'home_slider' => [
+            'slider' => [
                 'class' => SubListBehavior::className(),
-                'listId' => 'home_slider',
-                'route' => '/wavecms-page/home-slider/sub-list',
+                'listId' => 'slider',
+                'route' => '/wavecms-page/slider/sub-list',
                 'parentField' => 'page_id'
             ],
             'grid' => [

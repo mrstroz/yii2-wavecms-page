@@ -18,6 +18,7 @@ class PageSettings extends SettingsModel
     public $is_home_grid;
     public $is_home_sections;
 
+    public $is_page_slider;
     public $is_page_grid;
     public $is_page_sections;
 
@@ -46,7 +47,7 @@ class PageSettings extends SettingsModel
 
             [['is_top_submenu', 'is_bottom_submenu'], 'boolean'],
             [['is_home_slider', 'is_home_grid','is_home_sections'], 'boolean'],
-            [['is_page_grid', 'is_page_sections'], 'boolean'],
+            [['is_page_slider', 'is_page_grid', 'is_page_sections'], 'boolean'],
 
             [['default_meta_title', 'default_meta_description', 'default_meta_keywords'], 'string'],
             [['top_javascript', 'btm_javascript'], 'string'],
@@ -66,6 +67,7 @@ class PageSettings extends SettingsModel
             'is_home_grid' => \Yii::t('wavecms_page/main', 'Grid'),
             'is_home_sections' => \Yii::t('wavecms_page/main', 'Sections'),
 
+            'is_page_slider' => \Yii::t('wavecms_page/main', 'Slider'),
             'is_page_grid' => \Yii::t('wavecms_page/main', 'Grid'),
             'is_page_sections' => \Yii::t('wavecms_page/main', 'Sections'),
 
