@@ -90,7 +90,7 @@ class Front extends Component
 
     /**
      * Display link by page
-     * @param Menu $menu
+     * @param mixed $menu
      * @param $text Html:a text
      * @param array $options Html:a options
      * @param array $fields
@@ -120,7 +120,7 @@ class Front extends Component
 
     /**
      * Check if page is active
-     * @param Menu $menu
+     * @param mixed $menu
      * @param array $fields
      * @return bool
      * @throws \yii\base\InvalidConfigException
@@ -169,7 +169,10 @@ class Front extends Component
     public static function youTubeId($url)
     {
         parse_str(parse_url($url, PHP_URL_QUERY), $vars);
-        return $vars['v'];
+        if (isset($vars['v'])) {
+            return $vars['v'];
+        }
+        return false;
     }
 
     /**
