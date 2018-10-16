@@ -147,7 +147,7 @@ class Front extends Component
             }
 
             if (isset(self::$pages[$menu->{$fields['page_id']}]['link'])) {
-                if (Yii::$app->requestedRoute === self::$pageRoute && Yii::$app->request->getQueryParam(self::$linkParam) === self::$pages[$menu->{$fields['page_id']}]['link']) {
+                if (Yii::$app->request->getQueryParam(self::$linkParam) === self::$pages[$menu->{$fields['page_id']}]['link']) {
                     return true;
                 }
 
