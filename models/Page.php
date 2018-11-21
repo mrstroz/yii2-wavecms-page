@@ -7,6 +7,8 @@ use mrstroz\wavecms\components\behaviors\CheckboxListBehavior;
 use mrstroz\wavecms\components\behaviors\SubListBehavior;
 use mrstroz\wavecms\components\behaviors\TranslateBehavior;
 use mrstroz\wavecms\metatags\components\behaviors\MetaTagsBehavior;
+use mrstroz\wavecms\metatags\models\MetaTags;
+use mrstroz\wavecms\metatags\models\query\MetaTagsQuery;
 use mrstroz\wavecms\page\models\query\PageItemQuery;
 use mrstroz\wavecms\page\models\query\PageLangQuery;
 use mrstroz\wavecms\page\models\query\PageQuery;
@@ -33,6 +35,8 @@ use yii\helpers\Url;
  * @property PageItem[] $slider
  * @property PageItem[] $grid
  * @property PageItem[] $sections
+ *
+ * @property MetaTags $metaTags
  */
 class Page extends ActiveRecord
 {
@@ -40,9 +44,6 @@ class Page extends ActiveRecord
     const SCENARIO_HOME = 'home';
     const SCENARIO_TEXT = 'text';
 
-    public $meta_title;
-    public $meta_description;
-    public $meta_keywords;
 
     static public $templates = [
     ];
@@ -137,7 +138,6 @@ class Page extends ActiveRecord
             [['link'], 'validateUniqueLink'],
             [['type', 'template'], 'string', 'max' => 255],
             [['text'], 'string'],
-            [['meta_title', 'meta_description', 'meta_keywords'], 'string']
         ];
     }
 
@@ -157,9 +157,6 @@ class Page extends ActiveRecord
             'languages' => Yii::t('wavecms_page/main', 'Languages'),
             'pageLangTitle' => Yii::t('wavecms_page/main', 'Title'),
             'pageLangLink' => Yii::t('wavecms_page/main', 'Link'),
-            'meta_title' => Yii::t('wavecms_page/main', 'Meta title'),
-            'meta_description' => Yii::t('wavecms_page/main', 'Meta description'),
-            'meta_keywords' => Yii::t('wavecms_page/main', 'Meta keywords'),
         ];
     }
 
@@ -218,6 +215,18 @@ class Page extends ActiveRecord
     {
         return $this->getItems()->getItems()->andWhere(['type' => 'section']);
 
+    }
+
+    /**
+     * Meta tags relation
+     * @return MetaTagsQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getMetaTags()
+    {
+        /** @var MetaTagsQuery $query */
+        $query = $this->hasOne(MetaTags::class, ['model_id' => 'id']);
+        return $query->getMetaTags($this->formName());
     }
 
     /**

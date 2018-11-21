@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Run
 
 ```
-composer require --prefer-source "mrstroz/yii2-wavecms-page" "~0.3.1"
+composer require --prefer-source "mrstroz/yii2-wavecms-page" "~0.4.0"
 ```
 
 or add
 
 ```
-"mrstroz/yii2-wavecms-page": "~0.3.1"
+"mrstroz/yii2-wavecms-page": "~0.4.0"
 ```
 
 to the require section of your `composer.json` file.
