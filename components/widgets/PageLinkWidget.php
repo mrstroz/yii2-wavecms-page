@@ -3,6 +3,7 @@
 namespace mrstroz\wavecms\page\components\widgets;
 
 use kartik\select2\Select2;
+use mrstroz\wavecms\page\models\Menu;
 use mrstroz\wavecms\page\models\Page;
 use mrstroz\wavecms\page\models\PageLang;
 use Yii;
@@ -25,6 +26,7 @@ class PageLinkWidget extends Widget
     public $idAttribute = 'page_id';
     public $urlAttribute = 'page_url';
     public $blankAttribute = 'page_blank';
+    public $relAttribute = 'rel';
 
     public function init()
     {
@@ -44,7 +46,7 @@ class PageLinkWidget extends Widget
     public function run()
     {
         echo Html::beginTag('div', ['class' => 'row']);
-        echo Html::beginTag('div', ['class' => 'col-md-5']);
+        echo Html::beginTag('div', ['class' => 'col-md-4']);
         echo $this->form->field($this->model, $this->idAttribute)->widget(Select2::className(), [
             'data' => $this->pages,
             'options' => ['placeholder' => '... ' . Yii::t('wavecms_page/main', 'choose')],
@@ -53,15 +55,19 @@ class PageLinkWidget extends Widget
             ],
         ]);
         echo Html::endTag('div');
-        echo Html::beginTag('div', ['class' => 'col-md-5']);
+        echo Html::beginTag('div', ['class' => 'col-md-4']);
         echo $this->form->field($this->model, $this->urlAttribute)->hint(Yii::t('wavecms_page/main', 'Format: <code>http://exmple.com/url-to-page</code> or <code>/url-to-page</code>'));
         echo Html::endTag('div');
 
         echo Html::beginTag('div', ['class' => 'col-md-2']);
         echo $this->form->field($this->model, $this->blankAttribute)->dropDownList([
-            '0' => Yii::t('wavecms_page/main','No'),
-            '1' => Yii::t('wavecms_page/main','Yes'),
+            '0' => Yii::t('wavecms_page/main', 'No'),
+            '1' => Yii::t('wavecms_page/main', 'Yes'),
         ]);
+        echo Html::endTag('div');
+
+        echo Html::beginTag('div', ['class' => 'col-md-2']);
+        echo $this->form->field($this->model, $this->relAttribute)->dropDownList(Menu::REL_OPTIONS);
         echo Html::endTag('div');
 
         echo Html::endTag('div');

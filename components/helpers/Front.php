@@ -19,7 +19,8 @@ class Front extends Component
     public static $fields = [
         'page_id' => 'page_id',
         'page_url' => 'page_url',
-        'page_blank' => 'page_blank'
+        'page_blank' => 'page_blank',
+        'rel' => 'rel'
     ];
 
     /** @var string Param in url used for page link */
@@ -107,6 +108,10 @@ class Front extends Component
 
             if ($menu->{$fields['page_blank']}) {
                 $options['target'] = '_blank';
+            }
+
+            if ($menu->{$fields['rel']}) {
+                $options['rel'] = $menu->{$fields['rel']};
             }
 
             return Html::a($text, self::linkUrl(

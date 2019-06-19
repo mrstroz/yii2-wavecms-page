@@ -21,7 +21,7 @@ use yii\db\ActiveRecord;
  * @property string $languages
  * @property string $page_id
  * @property string $page_blank
-
+ * @property string $rel
  * @property string $title
  * @property string $page_url
  *
@@ -30,6 +30,13 @@ use yii\db\ActiveRecord;
  */
 class Menu extends ActiveRecord
 {
+
+    public const REL_OPTIONS = [
+        '' => '',
+        'nofollow' => 'nofollow',
+        'dofollow' => 'dofollow'
+    ];
+
     /**
      * @inheritdoc
      */
@@ -72,7 +79,7 @@ class Menu extends ActiveRecord
         return [
             [['parent_id', 'publish', 'sort', 'page_id', 'page_blank'], 'integer'],
             [['type'], 'string', 'max' => 10],
-            [['title', 'page_url'], 'string', 'max' => 255],
+            [['title', 'page_url', 'rel'], 'string', 'max' => 255],
             [['languages', 'title'], 'required']
         ];
     }
@@ -93,6 +100,7 @@ class Menu extends ActiveRecord
             'page_url' => Yii::t('wavecms_page/main', 'Url'),
             'title' => Yii::t('wavecms_page/main', 'Title'),
             'page_blank' => Yii::t('wavecms_page/main', 'New tab'),
+            'rel' => Yii::t('wavecms_page/main', 'Rel attribute'),
         ];
     }
 
@@ -116,8 +124,9 @@ class Menu extends ActiveRecord
     /**
      * @return MenuQuery|\yii\db\ActiveQuery
      */
-    public function getSubmenu() {
-        return $this->hasMany(Menu::class,['parent_id' => 'id']);
+    public function getSubmenu()
+    {
+        return $this->hasMany(Menu::class, ['parent_id' => 'id']);
     }
 
 }
