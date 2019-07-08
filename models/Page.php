@@ -17,6 +17,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "page".
@@ -29,6 +30,9 @@ use yii\helpers\Url;
  * @property string $title
  * @property string $link
  * @property string $text
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $noindex
  *
  * @property PageLang[] $translations
  * @property PageItem[] $items
@@ -40,10 +44,10 @@ use yii\helpers\Url;
  */
 class Page extends ActiveRecord
 {
+    public $noindex;
 
     const SCENARIO_HOME = 'home';
     const SCENARIO_TEXT = 'text';
-
 
     static public $templates = [
     ];
@@ -113,9 +117,10 @@ class Page extends ActiveRecord
                 'class' => SitemapBehavior::className(),
                 'scope' => function ($model) {
                     /** @var PageQuery $model */
-                    $model->byAllCriteria()->byType(['text']);
+                    $model->byAllCriteria()->joinWith('metaTags', false)->andWhere(['!=', 'noindex', 1])->byType(['text']);
                 },
                 'dataClosure' => function ($model) {
+                    /** @var Page $model */
                     return [
                         'loc' => Url::to(['/' . $model->link], true),
                         'lastmod' => $model->updated_at,
