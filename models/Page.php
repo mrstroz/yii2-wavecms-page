@@ -229,9 +229,18 @@ class Page extends ActiveRecord
      */
     public function getMetaTags()
     {
+        $lang = Yii::$app->language;
+        if (Yii::$app->id === 'app-backend') {
+            $lang = Yii::$app->wavecms->editedLanguage;
+        }
+
         /** @var MetaTagsQuery $query */
-        $query = $this->hasOne(MetaTags::class, ['model_id' => 'id']);
-        return $query->getMetaTags($this->formName());
+        $query = $this->hasOne(MetaTags::class, ['model_id' => 'id'])->andOnCondition([
+            MetaTags::tableName() . '.model' => $this->formName(),
+            MetaTags::tableName() . '.language' => $lang
+        ]);
+
+        return $query;
     }
 
     /**
