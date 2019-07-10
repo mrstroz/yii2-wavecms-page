@@ -11,6 +11,7 @@ use mrstroz\wavecms\page\models\query\PageItemQuery;
 use mrstroz\wavecms\page\models\query\PageQuery;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "page_item".
@@ -25,6 +26,7 @@ use yii\db\ActiveQuery;
  * @property string $languages
  * @property string $image
  * @property string $image_mobile
+ * @property string $link_rel
  * @property string $link_page_id
  * @property string $link_page_blank
  *
@@ -39,7 +41,7 @@ use yii\db\ActiveQuery;
  * @property Page $page
  *
  */
-class PageItem extends \yii\db\ActiveRecord
+class PageItem extends ActiveRecord
 {
 
     static public $templates = [
@@ -95,7 +97,7 @@ class PageItem extends \yii\db\ActiveRecord
             [['type', 'template'], 'string', 'max' => 255],
             [['image', 'image_mobile'], 'image'],
             [['languages', 'title'], 'required'],
-            [['title', 'link_title', 'link_page_url'], 'string', 'max' => 255],
+            [['title', 'link_title', 'link_rel', 'link_page_url'], 'string', 'max' => 255],
             [['text'], 'string'],
         ];
     }
@@ -118,6 +120,7 @@ class PageItem extends \yii\db\ActiveRecord
             'image' => Yii::t('wavecms_page/main', 'Image'),
             'image_mobile' => Yii::t('wavecms_page/main', 'Image mobile'),
             'link_title' => Yii::t('wavecms_page/main', 'Link title'),
+            'link_rel' => Yii::t('wavecms_page/main', 'Link rel'),
             'link_page_id' => Yii::t('wavecms_page/main', 'Page'),
             'link_page_url' => Yii::t('wavecms_page/main', 'Url'),
             'link_page_blank' => Yii::t('wavecms_page/main', 'New tab')
